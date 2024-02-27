@@ -1,0 +1,8 @@
+﻿################################################################################
+# Diese .gitignore-Datei wurde von Microsoft(R) Visual Studio automatisch erstellt.
+################################################################################
+
+/.vs
+/KinoVerwaltungAPI/.vs/KinoVerwaltungAPI
+/KinoVerwaltungAPI/KinoVerwaltungAPI/obj/Debug/net8.0
+/KinoVerwaltungAPI/KinoVerwaltungAPI/obj
