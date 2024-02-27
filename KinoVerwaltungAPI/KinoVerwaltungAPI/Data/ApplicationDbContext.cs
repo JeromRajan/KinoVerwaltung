@@ -30,6 +30,21 @@
                     .WithOne()
                     .HasForeignKey(s => s.KinoId);
 
+            modelBuilder.Entity<Saal>()
+                .HasMany(s => s.Reihen)
+                .WithOne(r => r.Saal)
+                .HasForeignKey(r => r.SaalId);
+
+            modelBuilder.Entity<Reihe>()
+                .HasMany(r => r.Sitze)
+                .WithOne(s => s.Reihe)
+                .HasForeignKey(s => s.ReiheId);
+
+            modelBuilder.Entity<Vorfuehrung>()
+                .HasMany(v => v.Tickets)
+                .WithOne(t => t.Vorfuehrung)
+                .HasForeignKey(t => t.VorfuehrungId);
+
             // Add other configurations
         }
     }

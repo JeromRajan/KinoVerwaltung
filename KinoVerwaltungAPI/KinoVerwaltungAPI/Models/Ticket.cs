@@ -9,20 +9,24 @@ namespace KinoVerwaltungAPI.Models
         public int TicketId { get; set; }
 
         [Required]
-        public int VorführungId { get; set; }
+        public int VorfuehrungId { get; set; }
 
         [Required]
         public int BenutzerId { get; set; }
+        
+        [Required]
+        public decimal Preis { get; set; }
 
-        [ForeignKey("VorführungId")]
-        public virtual Vorführung Vorführung { get; set; }
+        // Fremdschlüsselbeziehungen
+
+        [ForeignKey("VorfuehrungId")]
+        public virtual Vorfuehrung Vorfuehrung { get; set; }
 
         [ForeignKey("BenutzerId")]
         public virtual Benutzer Benutzer { get; set; }
 
-        [Required]
-        public decimal Preis { get; set; }
+        [ForeignKey("SitzId")] 
+        public Sitz Sitz { get; set; } 
 
-        // Weitere Eigenschaften wie Sitzplatz können hier hinzugefügt werden
     }
 }

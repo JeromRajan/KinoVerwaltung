@@ -7,7 +7,7 @@ namespace KinoVerwaltungAPI.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int VorführungId { get; set; }
+        public int VorfuehrungId { get; set; }
 
         [Required]
         public DateTime Datum { get; set; }
@@ -26,5 +26,6 @@ namespace KinoVerwaltungAPI.Models
         public Film Film { get; set; }
 
         // Additional relationships like Tickets can be added here
+        public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }

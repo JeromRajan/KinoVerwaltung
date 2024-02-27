@@ -1,6 +1,6 @@
 ﻿namespace KinoVerwaltungAPI.Services
 {
-    public interface IVorführungService
+    public interface IVorfuehrungService
     {
     }
 }
