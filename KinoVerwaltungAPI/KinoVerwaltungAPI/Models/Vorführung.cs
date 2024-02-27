@@ -19,9 +19,9 @@ namespace KinoVerwaltungAPI.Models
         public int SaalId { get; set; } 
         public int FilmId { get; set; } 
         // Navigation properties
-        public virtual Saal Saal { get; set; } 
+        public virtual Saal? Saal { get; set; } 
         
-        public virtual Film Film { get; set; } 
-        public virtual ICollection<Ticket> Tickets { get; set; } 
+        public virtual Film? Film { get; set; } 
+        public virtual ICollection<Ticket>? Tickets { get; set; } 
     }
 }
