@@ -29,7 +29,7 @@
         {
             base.OnModelCreating(modelBuilder);
 
-            // Konfiguration Kinosäle
+            #region Kinosäle Konfiguration
             modelBuilder.Entity<Kino>()
                 .HasMany(k => k.Saele)
                 .WithOne(s => s.Kino)
@@ -47,52 +47,51 @@
                 .WithOne(s => s.Reihe)
                 .HasForeignKey(s => s.ReiheId)
                 .OnDelete(DeleteBehavior.Cascade);
+            #endregion
 
+            #region Vorführungen Konfiguration
             modelBuilder.Entity<Vorführung>()
                 .HasMany(v => v.Tickets)
                 .WithOne(t => t.Vorführung)
                 .HasForeignKey(t => t.VorführungId)
                 .OnDelete(DeleteBehavior.Restrict); // Vermeiden von Kaskadierungskonflikten
+            #endregion
 
-            // Konfiguration von Mitgliederkarte und Mitgliederstatus Beziehung
+            #region Mitgliederkarte und Mitgliederstatus Beziehung
             modelBuilder.Entity<Mitgliederkarte>()
                 .HasOne(mk => mk.Mitgliederstatus)
                 .WithMany()
                 .HasForeignKey(mk => mk.MitgliederstatusId)
                 .OnDelete(DeleteBehavior.Restrict); // Vermeiden von Kaskadierungskonflikten
+            #endregion
 
-            // Konfiguration für Ticket und Mitgliederkarte mit Zahlungsmethode
+            #region Ticket und Zahlungsmethode Konfiguration
             modelBuilder.Entity<Ticket>()
                 .HasOne(t => t.Benutzer)
-                .WithMany(b => b.Tickets) // Vorausgesetzt, es gibt eine Navigationseigenschaft Tickets in Benutzer
+                .WithMany(b => b.Tickets)
                 .HasForeignKey(t => t.BenutzerId)
-                .OnDelete(DeleteBehavior.Cascade); // Cascade nur, wenn es geschäftlich sinnvoll ist
+                .OnDelete(DeleteBehavior.Cascade); // Cascade, wenn geschäftlich sinnvoll
 
             modelBuilder.Entity<Ticket>()
                 .HasOne(t => t.Sitz)
-                .WithMany() // Keine Navigationseigenschaft in Sitz vorausgesetzt
+                .WithMany()
                 .HasForeignKey(t => t.SitzId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Mitgliederkarte>()
-                .HasOne(mk => mk.Zahlungsmethode)
-                .WithMany(zm => zm.Mitgliederkarten)
-                .HasForeignKey(mk => mk.ZahlungsmethodeId)
-                .OnDelete(DeleteBehavior.Restrict); // Vermeiden von Kaskadierungskonflikten
-
-            // Zusätzliche Konfigurationen für die Beziehung zwischen Benutzer und Mitgliederkarte
-            modelBuilder.Entity<Benutzer>()
-                .HasOne(b => b.Mitgliederkarte)
-                .WithOne(mk => mk.Benutzer)
-                .HasForeignKey<Mitgliederkarte>(mk => mk.BenutzerId)
-                .OnDelete(DeleteBehavior.Cascade); // Sinnvoll, um die Mitgliederkarte zu löschen, wenn der Benutzer gelöscht wird
-
-            // Konfiguration für Zahlungsmethode in Ticket (falls nicht bereits oben definiert)
             modelBuilder.Entity<Ticket>()
                 .HasOne(t => t.Zahlungsmethode)
                 .WithMany(zm => zm.Tickets)
                 .HasForeignKey(t => t.ZahlungsmethodeId)
                 .OnDelete(DeleteBehavior.Restrict); // Vermeiden von Kaskadierungskonflikten
+            #endregion
+
+            #region Benutzer und Mitgliederkarte Beziehung
+            modelBuilder.Entity<Benutzer>()
+                .HasOne(b => b.Mitgliederkarte)
+                .WithOne(mk => mk.Benutzer)
+                .HasForeignKey<Mitgliederkarte>(mk => mk.BenutzerId)
+                .OnDelete(DeleteBehavior.Cascade); // Löschen der Mitgliederkarte, wenn der Benutzer gelöscht wird
+            #endregion
         }
     }
 }

@@ -18,8 +18,7 @@ namespace KinoVerwaltungAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Kino>>> GetAll()
         {
-            var kinos = await _kinoService.GetAllKinosAsync();
-            return Ok(kinos);
+            return Ok(await _kinoService.GetAllKinosAsync());
         }
 
         [HttpGet("{id}")]
@@ -33,6 +32,30 @@ namespace KinoVerwaltungAPI.Controllers
             return Ok(kino);
         }
 
-        // Additional endpoints for Create, Update, and Delete
+        [HttpPost]
+        public async Task<ActionResult> Add([FromBody] Kino kino)
+        {
+            await _kinoService.AddKinoAsync(kino);
+            return CreatedAtAction(nameof(Get), new { id = kino.KinoId }, kino);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Update(int id, [FromBody] Kino kino)
+        {
+            if (id != kino.KinoId)
+            {
+                return BadRequest();
+            }
+            await _kinoService.UpdateKinoAsync(kino);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            await _kinoService.DeleteKinoAsync(id);
+            return NoContent();
+        }
     }
+
 }

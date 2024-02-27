@@ -1,10 +1,14 @@
-﻿namespace KinoVerwaltungAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace KinoVerwaltungAPI.Models
 {
     public class Mitgliederkarte
     {
         public int MitgliederkarteId { get; set; }
-        public decimal VerfügbareBetrag { get; set; }
-        public DateTime Ablaufdatum { get; set; }
+
+        public decimal? VerfügbareBetrag { get; set; }
+        public DateTime? Ablaufdatum { get; set; }
+        [Required]
         public string IdentifikationsNummer { get; set; }
         
         // Foreign keys

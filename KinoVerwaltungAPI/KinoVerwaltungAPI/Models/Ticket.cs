@@ -1,8 +1,11 @@
-﻿namespace KinoVerwaltungAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace KinoVerwaltungAPI.Models
 {
     public class Ticket
     {
         public int TicketId { get; set; }
+        [Required]
         public decimal Preis { get; set; }
 
         // Foreign keys

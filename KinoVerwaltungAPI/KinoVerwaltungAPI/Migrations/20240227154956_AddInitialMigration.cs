@@ -48,7 +48,7 @@ namespace KinoVerwaltungAPI.Migrations
                     MitgliederstatusId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StatusName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rabatt = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Rabatt = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -110,7 +110,7 @@ namespace KinoVerwaltungAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Titel = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Dauer = table.Column<int>(type: "int", nullable: false),
-                    Beschreibung = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Beschreibung = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Altersfreigabe = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GenreId = table.Column<int>(type: "int", nullable: false),
                     SpracheId = table.Column<int>(type: "int", nullable: false)
@@ -139,7 +139,7 @@ namespace KinoVerwaltungAPI.Migrations
                     SaalId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Nummer = table.Column<int>(type: "int", nullable: false),
+                    Nummer = table.Column<int>(type: "int", nullable: true),
                     KinoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -182,7 +182,7 @@ namespace KinoVerwaltungAPI.Migrations
                     Datum = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Preis = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     StartZeit = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndZeit = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndZeit = table.Column<DateTime>(type: "datetime2", nullable: true),
                     SaalId = table.Column<int>(type: "int", nullable: false),
                     FilmId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -209,7 +209,7 @@ namespace KinoVerwaltungAPI.Migrations
                 {
                     SitzId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nummer = table.Column<int>(type: "int", nullable: false),
+                    Nummer = table.Column<int>(type: "int", nullable: true),
                     ReiheId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -260,8 +260,8 @@ namespace KinoVerwaltungAPI.Migrations
                 {
                     MitgliederkarteId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    VerfügbareBetrag = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Ablaufdatum = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    VerfügbareBetrag = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Ablaufdatum = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IdentifikationsNummer = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BenutzerId = table.Column<int>(type: "int", nullable: false),
                     MitgliederstatusId = table.Column<int>(type: "int", nullable: false),
@@ -287,7 +287,7 @@ namespace KinoVerwaltungAPI.Migrations
                         column: x => x.ZahlungsmethodeId,
                         principalTable: "Zahlungsmethoden",
                         principalColumn: "ZahlungsmethodeId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

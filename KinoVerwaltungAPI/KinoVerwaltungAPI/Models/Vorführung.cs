@@ -1,14 +1,19 @@
-﻿using System.Net.Sockets;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Net.Sockets;
 
 namespace KinoVerwaltungAPI.Models
 {
     public class Vorführung
     {
         public int VorführungId { get; set; }
+        [Required]
         public DateTime Datum { get; set; }
+        [Required]
         public decimal Preis { get; set; }
+        [Required]
         public DateTime StartZeit { get; set; }
-        public DateTime EndZeit { get; set; }
+ 
+        public DateTime? EndZeit { get; set; }
 
         // Foreign keys
         public int SaalId { get; set; } 

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KinoVerwaltungAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240227145444_AddInitialMigration")]
+    [Migration("20240227154956_AddInitialMigration")]
     partial class AddInitialMigration
     {
         /// <inheritdoc />
@@ -124,7 +124,6 @@ namespace KinoVerwaltungAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Beschreibung")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Dauer")
@@ -199,7 +198,7 @@ namespace KinoVerwaltungAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MitgliederkarteId"));
 
-                    b.Property<DateTime>("Ablaufdatum")
+                    b.Property<DateTime?>("Ablaufdatum")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("BenutzerId")
@@ -212,7 +211,7 @@ namespace KinoVerwaltungAPI.Migrations
                     b.Property<int>("MitgliederstatusId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("VerfügbareBetrag")
+                    b.Property<decimal?>("VerfügbareBetrag")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("ZahlungsmethodeId")
@@ -238,7 +237,7 @@ namespace KinoVerwaltungAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MitgliederstatusId"));
 
-                    b.Property<decimal>("Rabatt")
+                    b.Property<decimal?>("Rabatt")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("StatusName")
@@ -308,7 +307,7 @@ namespace KinoVerwaltungAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Nummer")
+                    b.Property<int?>("Nummer")
                         .HasColumnType("int");
 
                     b.HasKey("SaalId");
@@ -326,7 +325,7 @@ namespace KinoVerwaltungAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SitzId"));
 
-                    b.Property<int>("Nummer")
+                    b.Property<int?>("Nummer")
                         .HasColumnType("int");
 
                     b.Property<int>("ReiheId")
@@ -403,7 +402,7 @@ namespace KinoVerwaltungAPI.Migrations
                     b.Property<DateTime>("Datum")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EndZeit")
+                    b.Property<DateTime?>("EndZeit")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("FilmId")
@@ -514,7 +513,7 @@ namespace KinoVerwaltungAPI.Migrations
                     b.HasOne("KinoVerwaltungAPI.Models.Zahlungsmethode", "Zahlungsmethode")
                         .WithMany("Mitgliederkarten")
                         .HasForeignKey("ZahlungsmethodeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Benutzer");

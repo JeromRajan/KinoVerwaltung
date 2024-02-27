@@ -27,6 +27,6 @@ namespace KinoVerwaltungAPI.Models
         public string Land { get; set; }
 
         // Navigation properties
-        public ICollection<Kino> Kinos { get; set; }
+        public ICollection<Kino>? Kinos { get; set; }
     }
 }

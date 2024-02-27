@@ -1,8 +1,12 @@
-﻿namespace KinoVerwaltungAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace KinoVerwaltungAPI.Models
 {
     public class Zahlungsmethode
     {
         public int ZahlungsmethodeId { get; set; }
+
+        [Required]
         public string Name { get; set; }
 
 
