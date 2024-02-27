@@ -2,7 +2,7 @@
 
 namespace KinoVerwaltungAPI.Controllers
 {
-    public class VorführungController : Controller
+    public class VorfuehrungController : Controller
     {
         public IActionResult Index()
         {
