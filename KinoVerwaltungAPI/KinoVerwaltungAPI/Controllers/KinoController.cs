@@ -1,12 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using KinoVerwaltungAPI.Models;
+using KinoVerwaltungAPI.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace KinoVerwaltungAPI.Controllers
 {
-    public class KinoController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class KinoController : ControllerBase
     {
-        public IActionResult Index()
+        private readonly IKinoService _kinoService;
+
+        public KinoController(IKinoService kinoService)
         {
-            return View();
+            _kinoService = kinoService;
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Kino>>> Get()
+        {
+            return Ok(await _kinoService.GetAllKinosAsync());
+        }
+
+        // Weitere Endpunkte
     }
 }
