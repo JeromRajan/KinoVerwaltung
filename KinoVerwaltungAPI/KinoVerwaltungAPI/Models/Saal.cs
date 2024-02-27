@@ -14,6 +14,6 @@ namespace KinoVerwaltungAPI.Models
 
         // Navigation properties
         public virtual ICollection<Reihe>? Reihen { get; set; } 
-        public virtual Kino Kino { get; set; } 
+        public virtual Kino? Kino { get; set; } 
     }
 }

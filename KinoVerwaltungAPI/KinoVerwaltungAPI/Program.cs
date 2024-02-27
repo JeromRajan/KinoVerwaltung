@@ -6,8 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddScoped<KinoService>();
+builder.Services.AddScoped<IKinoRepository, KinoRepository>();
+
+//builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+//builder.Services.AddScoped<KinoService>();
 
 // Register your DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

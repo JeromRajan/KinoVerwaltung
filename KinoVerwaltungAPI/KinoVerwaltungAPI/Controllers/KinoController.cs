@@ -1,61 +1,66 @@
 ﻿using KinoVerwaltungAPI.Models;
 using KinoVerwaltungAPI.Services;
 using Microsoft.AspNetCore.Mvc;
+using KinoVerwaltungAPI.Dtos;
 
 namespace KinoVerwaltungAPI.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
     public class KinoController : ControllerBase
     {
-        private readonly KinoService _kinoService;
+        private readonly IKinoRepository _kinoRepository;
 
-        public KinoController(KinoService kinoService)
+        public KinoController(IKinoRepository kinoRepository)
         {
-            _kinoService = kinoService;
+            _kinoRepository = kinoRepository;
         }
 
+        // CRUD-Operationen 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Kino>>> GetAll()
+        public async Task<ActionResult<IEnumerable<Kino>>> GetAllKinos()
         {
-            return Ok(await _kinoService.GetAllKinosAsync());
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Kino>> Get(int id)
-        {
-            var kino = await _kinoService.GetKinoByIdAsync(id);
-            if (kino == null)
-            {
-                return NotFound();
-            }
-            return Ok(kino);
+            return Ok(await _kinoRepository.GetAllAsync());
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add([FromBody] Kino kino)
+        public async Task<ActionResult<Kino>> AddKino([FromBody] Kino kino)
         {
-            await _kinoService.AddKinoAsync(kino);
-            return CreatedAtAction(nameof(Get), new { id = kino.KinoId }, kino);
+            await _kinoRepository.AddAsync(kino);
+            return CreatedAtAction(nameof(GetKinoById), new { id = kino.KinoId }, kino);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, [FromBody] Kino kino)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Kino>> GetKinoById(int id)
         {
-            if (id != kino.KinoId)
+            var kino = await _kinoRepository.GetByIdAsync(id);
+            if (kino == null) return NotFound();
+            return Ok(kino);
+        }
+
+        //Spezifisch
+        [HttpPost("{kinoId}/saal")]
+        public async Task<IActionResult> AddSaalMitReihenUndSitzen(int kinoId, [FromBody] SaalDto saalDto)
+        {
+            try
             {
-                return BadRequest();
+                await _kinoRepository.AddSaalMitReihenUndSitzenAsync(kinoId, saalDto.Saal, saalDto.AnzahlReihen, saalDto.AnzahlSitzeProReihe);
+                return Ok();
             }
-            await _kinoService.UpdateKinoAsync(kino);
-            return NoContent();
+            catch (Exception ex)
+            {
+                // Geeignete Fehlerbehandlung
+                return StatusCode(500, ex.Message);
+            }
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        [HttpDelete("saal/{saalId}")]
+        public async Task<ActionResult> DeleteSaal(int saalId)
         {
-            await _kinoService.DeleteKinoAsync(id);
+            await _kinoRepository.DeleteSaalAsync(saalId);
             return NoContent();
         }
     }
+
 
 }
