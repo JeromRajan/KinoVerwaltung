@@ -1,32 +1,25 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace KinoVerwaltungAPI.Models
+﻿namespace KinoVerwaltungAPI.Models
 {
     public class Ticket
     {
-        [Key]
         public int TicketId { get; set; }
-
-        [Required]
-        public int VorfuehrungId { get; set; }
-
-        [Required]
-        public int BenutzerId { get; set; }
-        
-        [Required]
         public decimal Preis { get; set; }
 
-        // Fremdschlüsselbeziehungen
+        // Foreign keys
+        public int VorführungId { get; set; } 
+        public int SitzId { get; set; } 
+        public int BenutzerId { get; set; }
 
-        [ForeignKey("VorfuehrungId")]
-        public virtual Vorfuehrung Vorfuehrung { get; set; }
+        public int ZahlungsmethodeId { get; set; }
 
-        [ForeignKey("BenutzerId")]
+        // Navigation properties
+        public virtual Vorführung Vorführung { get; set; } 
+        
+        public virtual Sitz Sitz { get; set; } 
+        
         public virtual Benutzer Benutzer { get; set; }
 
-        [ForeignKey("SitzId")] 
-        public Sitz Sitz { get; set; } 
-
+        public virtual Zahlungsmethode Zahlungsmethode { get; set; }
     }
+
 }

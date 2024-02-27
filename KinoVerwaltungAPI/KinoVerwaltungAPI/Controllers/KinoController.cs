@@ -8,19 +8,31 @@ namespace KinoVerwaltungAPI.Controllers
     [Route("[controller]")]
     public class KinoController : ControllerBase
     {
-        private readonly IKinoService _kinoService;
+        private readonly KinoService _kinoService;
 
-        public KinoController(IKinoService kinoService)
+        public KinoController(KinoService kinoService)
         {
             _kinoService = kinoService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Kino>>> Get()
+        public async Task<ActionResult<IEnumerable<Kino>>> GetAll()
         {
-            return Ok(await _kinoService.GetAllKinosAsync());
+            var kinos = await _kinoService.GetAllKinosAsync();
+            return Ok(kinos);
         }
 
-        // Weitere Endpunkte
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Kino>> Get(int id)
+        {
+            var kino = await _kinoService.GetKinoByIdAsync(id);
+            if (kino == null)
+            {
+                return NotFound();
+            }
+            return Ok(kino);
+        }
+
+        // Additional endpoints for Create, Update, and Delete
     }
 }

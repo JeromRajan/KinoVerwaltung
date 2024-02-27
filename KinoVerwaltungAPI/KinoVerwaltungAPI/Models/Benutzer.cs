@@ -1,39 +1,26 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace KinoVerwaltungAPI.Models
+﻿namespace KinoVerwaltungAPI.Models
 {
     public class Benutzer
     {
-        [Key]
         public int BenutzerId { get; set; }
-
-        [Required]
-        [StringLength(255)]
-        public string Name { get; set; }
-
-        [Required]
-        [StringLength(255)]
         public string Vorname { get; set; }
-
-        [StringLength(255)]
+        public string Nachname { get; set; }
         public string Email { get; set; }
+        public string Telefon { get; set; }
+        public string Passwort { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string TelefonNr { get; set; }
+        // Foreign key
+        public int AdresseId { get; set; } 
 
+        public int RolleId { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string Password { get; set; }
-
-
-        // Beziehung zu Tickets
+        // Navigation properties
+        public virtual Adresse Adresse { get; set; } 
         public virtual ICollection<Ticket> Tickets { get; set; }
 
-        public Benutzer()
-        {
-            Tickets = new HashSet<Ticket>();
-        }
+        public virtual ICollection<Rolle> Rollen { get; set; }
+
+        public virtual Rolle Rolle { get; set; }
+        public virtual Mitgliederkarte Mitgliederkarte { get; set; }
     }
 }

@@ -1,28 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace KinoVerwaltungAPI.Models
+﻿namespace KinoVerwaltungAPI.Models
 {
     public class Film
     {
-        [Key]
         public int FilmId { get; set; }
-
-        [Required]
-        [StringLength(255)]
         public string Titel { get; set; }
-
-        [Required]
-        public DateTime Erscheinungsdatum { get; set; }
-
-        [StringLength(1024)]
+        public int Dauer { get; set; }
         public string Beschreibung { get; set; }
+        public string Altersfreigabe { get; set; }
+        // Foreign keys
+        public int GenreId { get; set; } 
 
-        // Beziehung zu Vorführungen
-        public virtual ICollection<Vorfuehrung> Vorführungen { get; set; }
+        public int SpracheId { get; set; } 
 
-        public Film()
-        {
-            Vorführungen = new HashSet<Vorfuehrung>();
-        }
+        // Navigation properties
+        public virtual Genre Genre { get; set; } 
+        
+        public virtual Sprache Sprache { get; set; } 
     }
+
 }

@@ -4,7 +4,14 @@
     {
         public int KinoId { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<Saal> Saele { get; set; }
-        public virtual Adresse Adresse { get; set; }
+        //Foreign keys
+        #region Foreign key
+        public int AdressId { get; set; }
+        #endregion
+
+        //Navigation propertys
+        public Adresse Adresse { get; set; }
+
+        public ICollection<Saal> Saele { get; set; }
     }
 }

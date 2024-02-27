@@ -1,11 +1,12 @@
 ﻿namespace KinoVerwaltungAPI.Models
 {
-    public class Genre
+    public class Sprache
     {
-        public int GenreId { get; set; }
+        public int SpracheId { get; set; }
         public string Name { get; set; }
 
         // Navigation property
         public virtual ICollection<Film> Filme { get; set; } 
     }
+
 }

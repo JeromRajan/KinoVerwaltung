@@ -4,32 +4,39 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KinoVerwaltungAPI.Services
 {
-    public class KinoService : IKinoService
+    public class KinoService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IRepository<Kino> _kinoRepository;
 
-        public KinoService(ApplicationDbContext context)
+        public KinoService(IRepository<Kino> kinoRepository)
         {
-            _context = context;
+            _kinoRepository = kinoRepository;
         }
 
         public async Task<IEnumerable<Kino>> GetAllKinosAsync()
         {
-            return await _context.Kinos.ToListAsync();
+            return await _kinoRepository.GetAllAsync();
         }
 
-        public async Task<Kino> GetKinoByIdAsync(int kinoId)
+        public async Task<Kino> GetKinoByIdAsync(int id)
         {
-            return await _context.Kinos.FindAsync(kinoId);
+            return await _kinoRepository.GetByIdAsync(id);
         }
 
-        public async Task<Kino> CreateKinoAsync(Kino kino)
+        public async Task AddKinoAsync(Kino kino)
         {
-            _context.Kinos.Add(kino);
-            await _context.SaveChangesAsync();
-            return kino;
+            await _kinoRepository.AddAsync(kino);
         }
 
+        public async Task UpdateKinoAsync(Kino kino)
+        {
+            await _kinoRepository.UpdateAsync(kino);
+        }
 
+        public async Task DeleteKinoAsync(int id)
+        {
+            await _kinoRepository.DeleteAsync(id);
+        }
     }
+
 }

@@ -26,9 +26,7 @@ namespace KinoVerwaltungAPI.Models
         [StringLength(255)]
         public string Land { get; set; }
 
-        // Optional: Weitere Eigenschaften wie Bundesland oder spezifische Anweisungen
-
-        // Beziehung zu Kino, falls jedes Kino eine eindeutige Adresse hat
-        // public virtual Kino Kino { get; set; }
+        // Navigation properties
+        public ICollection<Kino> Kinos { get; set; }
     }
 }
