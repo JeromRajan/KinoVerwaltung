@@ -1,10 +1,13 @@
-﻿namespace KinoVerwaltungAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace KinoVerwaltungAPI.Models
 {
     public class Sitz
     {
         public int SitzId { get; set; }
 
-        public int? Nummer { get; set; }
+        [Required]
+        public int Nummer { get; set; }
 
         // Foreign key
         public int ReiheId { get; set; }

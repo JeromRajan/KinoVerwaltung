@@ -1,15 +1,16 @@
 using KinoVerwaltungAPI.Data;
-using KinoVerwaltungAPI.Services;
+using KinoVerwaltungAPI.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddScoped<IKinoRepository, KinoRepository>();
 
-//builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-//builder.Services.AddScoped<KinoService>();
+//Repositorys Initailisieren
+builder.Services.AddScoped<IKinoRepository, KinoRepository>();
+builder.Services.AddScoped<IFilmRepository, FilmRepository>();
+
 
 // Register your DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

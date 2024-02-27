@@ -9,6 +9,6 @@ namespace KinoVerwaltungAPI.Models
         public string Name { get; set; }
 
         // Navigation property
-        public virtual ICollection<Film> Filme { get; set; } 
+        public virtual ICollection<Film>? Filme { get; set; } 
     }
 }

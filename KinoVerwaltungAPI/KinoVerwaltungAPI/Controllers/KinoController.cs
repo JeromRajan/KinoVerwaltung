@@ -1,5 +1,5 @@
 ﻿using KinoVerwaltungAPI.Models;
-using KinoVerwaltungAPI.Services;
+using KinoVerwaltungAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using KinoVerwaltungAPI.Dtos;
 
@@ -16,7 +16,8 @@ namespace KinoVerwaltungAPI.Controllers
             _kinoRepository = kinoRepository;
         }
 
-        // CRUD-Operationen 
+        //Kino-Endpunkte
+        #region Kino
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Kino>>> GetAllKinos()
         {
@@ -38,7 +39,10 @@ namespace KinoVerwaltungAPI.Controllers
             return Ok(kino);
         }
 
-        //Spezifisch
+        #endregion
+
+        //Saal-Endpunkte
+        #region Saal
         [HttpPost("{kinoId}/saal")]
         public async Task<IActionResult> AddSaalMitReihenUndSitzen(int kinoId, [FromBody] SaalDto saalDto)
         {
@@ -88,6 +92,7 @@ namespace KinoVerwaltungAPI.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+        #endregion
     }
 
 

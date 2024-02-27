@@ -8,7 +8,7 @@ using KinoVerwaltungAPI.Models;
 using KinoVerwaltungAPI.Dtos;
 
 
-namespace KinoVerwaltungAPI.Services
+namespace KinoVerwaltungAPI.Repositories
 {
     public class KinoRepository : IKinoRepository
     {
@@ -17,8 +17,12 @@ namespace KinoVerwaltungAPI.Services
         public KinoRepository(ApplicationDbContext context)
         {
             _context = context;
+        
+        
         }
 
+        // Implementierung der Kino-Methoden
+        #region Kino
         public async Task<Kino> GetByIdAsync(int id)
         {
             return await _context.Kinos.FindAsync(id);
@@ -50,6 +54,11 @@ namespace KinoVerwaltungAPI.Services
                 await _context.SaveChangesAsync();
             }
         }
+
+        #endregion
+
+        // Implementierung der Saal-Methoden
+        #region Saal
         public async Task AddSaalMitReihenUndSitzenAsync(int kinoId, Saal saal, int anzahlReihen, int anzahlSitzeProReihe)
         {
             var kino = await _context.Kinos.FindAsync(kinoId);
@@ -61,11 +70,11 @@ namespace KinoVerwaltungAPI.Services
             for (int i = 0; i < anzahlReihen; i++)
             {
                 var reihe = new Reihe { Sitze = new List<Sitz>() };
-                reihe.Nummer = i;
+                reihe.Nummer = i + 1;
                 for (int j = 0; j < anzahlSitzeProReihe; j++)
                 {
                     var newSitz = new Sitz();
-                    newSitz.Nummer = j;
+                    newSitz.Nummer = j + 1;
                     reihe.Sitze.Add(newSitz);
                 }
                 saal.Reihen.Add(reihe);
@@ -73,17 +82,6 @@ namespace KinoVerwaltungAPI.Services
 
             _context.Saele.Add(saal);
             await _context.SaveChangesAsync();
-        }
-
-
-        // Spezifische Methode
-        public async Task<Kino> GetKinoWithSaeleAsync(int kinoId)
-        {
-            return await _context.Kinos
-                .Include(k => k.Saele)
-                    .ThenInclude(s => s.Reihen)
-                        .ThenInclude(r => r.Sitze)
-                .FirstOrDefaultAsync(k => k.KinoId == kinoId);
         }
 
         public async Task UpdateSaalAsync(int saalId, Saal aktualisierterSaal)
@@ -130,9 +128,12 @@ namespace KinoVerwaltungAPI.Services
             for (int i = 0; i < saalDto.AnzahlReihen; i++)
             {
                 var reihe = new Reihe { Sitze = new List<Sitz>() };
+                reihe.Nummer = i + 1;
                 for (int j = 0; j < saalDto.AnzahlSitzeProReihe; j++)
                 {
-                    reihe.Sitze.Add(new Sitz());
+                    var sitz = new Sitz();
+                    sitz.Nummer = j + 1;
+                    reihe.Sitze.Add(sitz);
                 }
                 saal.Reihen.Add(reihe);
             }
@@ -163,10 +164,11 @@ namespace KinoVerwaltungAPI.Services
                     Reihen = s.Reihen.Select(r => new ReiheMitSitzeDto
                     {
                         ReiheId = r.ReiheId,
+                        ReiheNum = r.Nummer,
                         Sitze = r.Sitze.Select(sitz => new SitzDto
                         {
-                            SitzId = sitz.SitzId
-                            // Weitere Eigenschaften nach Bedarf
+                            SitzId = sitz.SitzId,
+                            SitzNum = sitz.Nummer,
                         }).ToList()
                     }).ToList()
                 }).ToList()
@@ -174,7 +176,7 @@ namespace KinoVerwaltungAPI.Services
 
             return kinoMitSaelenDto;
         }
-
+        #endregion
 
     }
 

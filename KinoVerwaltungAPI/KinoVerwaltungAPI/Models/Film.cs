@@ -18,9 +18,9 @@ namespace KinoVerwaltungAPI.Models
         public int SpracheId { get; set; } 
 
         // Navigation properties
-        public virtual Genre Genre { get; set; } 
+        public virtual Genre? Genre { get; set; } 
         
-        public virtual Sprache Sprache { get; set; } 
+        public virtual Sprache? Sprache { get; set; } 
     }
 
 }
