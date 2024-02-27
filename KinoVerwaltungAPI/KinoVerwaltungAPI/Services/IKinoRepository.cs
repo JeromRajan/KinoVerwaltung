@@ -1,4 +1,5 @@
 ﻿using KinoVerwaltungAPI.Models;
+using KinoVerwaltungAPI.Dtos;
 
 namespace KinoVerwaltungAPI.Services
 {
@@ -15,5 +16,8 @@ namespace KinoVerwaltungAPI.Services
         Task AddSaalMitReihenUndSitzenAsync(int kinoId, Saal saal, int anzahlReihen, int anzahlSitzeProReihe);
         Task UpdateSaalAsync(int saalId, Saal aktualisierterSaal);
         Task DeleteSaalAsync(int saalId);
+
+        Task UpdateSaalMitReihenUndSitzenAsync(int saalId, SaalDto saalDto);
+        Task<KinoMitSaelenDto> GetKinoMitSaelenAsync(int kinoId);
     }
 }

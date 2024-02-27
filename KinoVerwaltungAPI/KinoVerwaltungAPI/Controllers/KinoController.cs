@@ -60,6 +60,34 @@ namespace KinoVerwaltungAPI.Controllers
             await _kinoRepository.DeleteSaalAsync(saalId);
             return NoContent();
         }
+
+        [HttpPut("saal/{saalId}")]
+        public async Task<IActionResult> UpdateSaalMitReihenUndSitzen(int saalId, [FromBody] SaalDto saalDto)
+        {
+            try
+            {
+                await _kinoRepository.UpdateSaalMitReihenUndSitzenAsync(saalId, saalDto);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("{kinoId}/saele")]
+        public async Task<IActionResult> GetKinoMitSaelen(int kinoId)
+        {
+            try
+            {
+                var kinoMitSaelenDto = await _kinoRepository.GetKinoMitSaelenAsync(kinoId);
+                return Ok(kinoMitSaelenDto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 
 
