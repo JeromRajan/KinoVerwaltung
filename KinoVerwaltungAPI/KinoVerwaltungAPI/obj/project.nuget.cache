@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "dKX50E1eipslfB8Z2NIMC21beF1xbCpuKdaTfr/cWniAGMJO4xwHy5Nh9uXFfZiuffJlRC+aORfs00O1xk8OFw==",
+  "success": true,
+  "projectFilePath": "E:\\repo\\KinoVerwaltung\\KinoVerwaltungAPI\\KinoVerwaltungAPI\\KinoVerwaltungAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jerom\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\jerom\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\jerom\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\jerom\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\jerom\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\jerom\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
