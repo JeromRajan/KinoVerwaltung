@@ -34,10 +34,18 @@ namespace KinoVerwaltungAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddVorführung([FromBody] Vorführung Vorführung)
+        public async Task<IActionResult> AddVorführung([FromBody] Vorführung vorführung)
         {
-            await _VorführungRepository.AddVorführungAsync(Vorführung);
-            return CreatedAtAction(nameof(GetVorführungById), new { id = Vorführung.VorführungId }, Vorführung);
+            try
+            {
+                await _VorführungRepository.AddVorführungAsync(vorführung);
+                return CreatedAtAction(nameof(GetVorführungById), new { id = vorführung.VorführungId }, vorführung);
+            }
+            catch (Exception ex)
+            {
+                // Rückgabe einer Fehlermeldung bei Konflikten
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut("{id}")]

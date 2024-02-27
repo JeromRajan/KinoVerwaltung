@@ -22,29 +22,42 @@ namespace KinoVerwaltungAPI.Repositories
             return await _context.Vorführungen.ToListAsync();
         }
 
-        public async Task<Vorführung> GetVorführungByIdAsync(int VorführungId)
+        public async Task<Vorführung> GetVorführungByIdAsync(int vorführungId)
         {
-            return await _context.Vorführungen.FindAsync(VorführungId);
+            return await _context.Vorführungen.FindAsync(vorführungId);
         }
 
-        public async Task AddVorführungAsync(Vorführung Vorführung)
+        public async Task AddVorführungAsync(Vorführung vorführung)
         {
-            _context.Vorführungen.Add(Vorführung);
-            await _context.SaveChangesAsync();
-        }
+            // Überprüfen Sie, ob bereits eine Vorführung im gewählten Saal zur gewünschten Zeit existiert
+            var konfliktVorfuehrung = await _context.Vorführungen
+                .AnyAsync(v => v.SaalId == vorführung.SaalId &&
+                               ((v.StartZeit < vorführung.EndZeit && v.EndZeit > vorführung.StartZeit)));
 
-        public async Task UpdateVorführungAsync(Vorführung Vorführung)
-        {
-            _context.Vorführungen.Update(Vorführung);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task DeleteVorführungAsync(int VorführungId)
-        {
-            var Vorführung = await _context.Vorführungen.FindAsync(VorführungId);
-            if (Vorführung != null)
+            if (konfliktVorfuehrung)
             {
-                _context.Vorführungen.Remove(Vorführung);
+                // Wirf eine Ausnahme oder gebe einen Fehler zurück
+                throw new Exception("Der Saal ist zur gewählten Start- und Endzeit nicht verfügbar.");
+            }
+            else
+            {
+                _context.Vorführungen.Add(vorführung);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task UpdateVorführungAsync(Vorführung vorführung)
+        {
+            _context.Vorführungen.Update(vorführung);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteVorführungAsync(int vorführungId)
+        {
+            var vorführung = await _context.Vorführungen.FindAsync(vorführungId);
+            if (vorführung != null)
+            {
+                _context.Vorführungen.Remove(vorführung);
                 await _context.SaveChangesAsync();
             }
         }
