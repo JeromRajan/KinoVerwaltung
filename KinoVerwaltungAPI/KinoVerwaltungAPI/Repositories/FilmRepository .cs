@@ -56,11 +56,21 @@ namespace KinoVerwaltungAPI.Repositories
         public async Task DeleteFilmAsync(int filmId)
         {
             var film = await _context.Filme.FindAsync(filmId);
-            if (film != null)
+            //Überprüfen ob der Film existiert
+            if (film == null)
             {
-                _context.Filme.Remove(film);
-                await _context.SaveChangesAsync();
+                throw new Exception("Film nicht gefunden.");
             }
+
+            // Überprüfen, ob der Film zugehörige Vorführungen hat
+            var hatVorfuehrungen = await _context.Vorführungen.AnyAsync(v => v.FilmId == filmId);
+            if (hatVorfuehrungen)
+            {
+                throw new Exception("Der Film kann nicht gelöscht werden, da zugehörige Vorführungen existieren.");
+            }
+
+            _context.Filme.Remove(film);
+            await _context.SaveChangesAsync();
         }
 
         #endregion

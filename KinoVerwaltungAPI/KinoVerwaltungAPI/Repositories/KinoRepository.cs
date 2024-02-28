@@ -103,11 +103,21 @@ namespace KinoVerwaltungAPI.Repositories
         public async Task DeleteSaalAsync(int saalId)
         {
             var saal = await _context.Saele.FindAsync(saalId);
-            if (saal != null)
+            //Überprüfen ob der Saal vorhanden ist
+            if (saal == null)
             {
-                _context.Saele.Remove(saal);
-                await _context.SaveChangesAsync();
+                throw new Exception("Saal nicht gefunden.");
             }
+
+            // Überprüfen, ob der Saal zugehörige Vorführungen hat
+            var hatVorfuehrungen = await _context.Vorführungen.AnyAsync(v => v.SaalId == saalId);
+            if (hatVorfuehrungen)
+            {
+                throw new Exception("Der Saal kann nicht gelöscht werden, da zugehörige Vorführungen existieren.");
+            }
+
+            _context.Saele.Remove(saal);
+            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateSaalMitReihenUndSitzenAsync(int saalId, SaalDto saalDto)

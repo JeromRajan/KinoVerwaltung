@@ -61,8 +61,15 @@ namespace KinoVerwaltungAPI.Controllers
         [HttpDelete("saal/{saalId}")]
         public async Task<ActionResult> DeleteSaal(int saalId)
         {
-            await _kinoRepository.DeleteSaalAsync(saalId);
-            return NoContent();
+            try
+            {
+                await _kinoRepository.DeleteSaalAsync(saalId);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut("saal/{saalId}")]

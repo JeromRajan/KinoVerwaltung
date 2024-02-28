@@ -77,14 +77,15 @@ namespace KinoVerwaltungAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFilm(int id)
         {
-            var film = await _filmRepository.GetFilmByIdAsync(id);
-            if (film == null)
+            try
             {
-                return NotFound();
+                await _filmRepository.DeleteFilmAsync(id);
+                return NoContent();
             }
-
-            await _filmRepository.DeleteFilmAsync(id);
-            return NoContent();
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         #endregion
 
