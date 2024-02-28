@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KinoVerwaltungAPI.Data;
+using KinoVerwaltungAPI.Dtos;
 using KinoVerwaltungAPI.Models;
+using KinoVerwaltungAPI.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace KinoVerwaltungAPI.Repositories
@@ -17,6 +19,8 @@ namespace KinoVerwaltungAPI.Repositories
             _context = context;
         }
 
+        // Implementierung der Methoden für Vorführungen
+        #region Vorführungen
         public async Task<IEnumerable<Vorführung>> GetAllVorführungenAsync()
         {
             return await _context.Vorführungen.ToListAsync();
@@ -62,6 +66,11 @@ namespace KinoVerwaltungAPI.Repositories
             }
         }
 
+        #endregion
+
+        // Implementierung der Methoden für das Programm
+        #region Programm
+
         public async Task<IEnumerable<Vorführung>> GetProgrammFürAktuelleWocheAsync()
         {
             var startOfWeek = DateTime.Now.StartOfWeek(DayOfWeek.Monday);
@@ -79,6 +88,59 @@ namespace KinoVerwaltungAPI.Repositories
                 .Where(v => v.StartZeit >= today && v.StartZeit < tomorrow)
                 .ToListAsync();
         }
+        #endregion
+
+        // Implementierung der Methode Sitzeverfügbarkeit
+        #region Sitzeverfügbarkeit
+
+        public async Task<VorführungSaalDto> GetVorführungSitzeAsync(int vorführungId)
+        {
+            // Lade den Saal und die Reihen und die Sitze, gib jede Reihe mit ihren Sitzen zurück, validiere die Verfügbarkeit der Sitze nach dem Status der Tickets
+            var vorführung = await _context.Vorführungen
+                .Include(v => v.Saal)
+                .Include(v => v.Saal.Reihen)
+                .ThenInclude(r => r.Sitze)
+                .FirstOrDefaultAsync(v => v.VorführungId == vorführungId);
+            if (vorführung == null)
+            {
+                throw new Exception("Vorführung nicht gefunden.");
+            }
+
+            var vorführungSaalDto = new VorführungSaalDto()
+            {
+                VorführungId = vorführung.VorführungId,
+                SaalId = vorführung.SaalId,
+                Reihen = new List<VorführungSaalReiheDto>()
+            };
+
+            foreach (var reihe in vorführung.Saal.Reihen)
+            {
+                var reiheDto = new VorführungSaalReiheDto()
+                {
+                    ReiheId = reihe.ReiheId,
+                    ReiheNummer = reihe.Nummer,
+                    Sitze = new List<VorführungSaalReiheSitzDto>()
+                };
+
+                foreach (var sitz in reihe.Sitze)
+                {
+                    // Überprüfen, ob der Sitz in der Vorführung besetzt ist
+                    var ticket = await _context.Tickets.FirstOrDefaultAsync(t => t.SitzId == sitz.SitzId && t.VorführungId == vorführungId);
+
+
+                    var sitzDto = new VorführungSaalReiheSitzDto()
+                    {
+                        SitzId = sitz.SitzId,
+                        SitzNummer = sitz.Nummer,
+                        IstBesetzt = ticket != null
+                    };
+                    reiheDto.Sitze.Add(sitzDto);
+                }
+                vorführungSaalDto.Reihen.Add(reiheDto);
+            }
+            return vorführungSaalDto;
+        }
+        #endregion
     }
 
     public static class DateTimeExtensions

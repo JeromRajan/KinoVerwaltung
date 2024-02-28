@@ -1,5 +1,5 @@
 ﻿using KinoVerwaltungAPI.Models;
-using KinoVerwaltungAPI.Repositories;
+using KinoVerwaltungAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

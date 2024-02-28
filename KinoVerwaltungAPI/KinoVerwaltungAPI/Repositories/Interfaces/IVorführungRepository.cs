@@ -1,6 +1,7 @@
-﻿using KinoVerwaltungAPI.Models;
+﻿using KinoVerwaltungAPI.Dtos;
+using KinoVerwaltungAPI.Models;
 
-namespace KinoVerwaltungAPI.Repositories
+namespace KinoVerwaltungAPI.Repositories.Interfaces
 {
     public interface IVorführungRepository
     {
@@ -11,5 +12,8 @@ namespace KinoVerwaltungAPI.Repositories
         Task DeleteVorführungAsync(int vorfuehrungId);
         Task<IEnumerable<Vorführung>> GetProgrammFürAktuelleWocheAsync();
         Task<IEnumerable<Vorführung>> GetProgrammFürHeuteAsync();
+
+        // Echzeit Informationen über verfügbare Sitze
+        Task<VorführungSaalDto> GetVorführungSitzeAsync(int vorführungId);
     }
 }

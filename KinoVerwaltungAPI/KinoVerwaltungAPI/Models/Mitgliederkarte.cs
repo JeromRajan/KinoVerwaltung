@@ -10,6 +10,9 @@ namespace KinoVerwaltungAPI.Models
         public DateTime? Ablaufdatum { get; set; }
         [Required]
         public string IdentifikationsNummer { get; set; }
+
+        [Required]
+        public int AnzahlGekaufterTickets { get; set; }
         
         // Foreign keys
         public int? BenutzerId { get; set; } 

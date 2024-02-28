@@ -7,10 +7,9 @@ namespace KinoVerwaltungAPI.Models
         public int KinoId { get; set; }
         [Required]
         public string Name { get; set; }
+
         //Foreign keys
-        #region Foreign key
         public int AdressId { get; set; }
-        #endregion
 
         //Navigation propertys
         public Adresse Adresse { get; set; }

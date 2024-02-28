@@ -1,8 +1,8 @@
 ﻿using KinoVerwaltungAPI.Models;
 
-namespace KinoVerwaltungAPI.Repositories
+namespace KinoVerwaltungAPI.Repositories.Interfaces
 {
-    public interface IZahlungsmethodeRepository
+    public interface IZahlungsRepository
     {
         Task<Zahlungsmethode> AddZahlungsmethodeAsync(Zahlungsmethode zahlungsmethode);
         Task<Zahlungsmethode> GetZahlungsmethodeByIdAsync(int id);

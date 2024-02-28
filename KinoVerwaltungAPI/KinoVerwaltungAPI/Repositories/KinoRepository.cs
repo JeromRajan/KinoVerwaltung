@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using KinoVerwaltungAPI.Data;
 using KinoVerwaltungAPI.Models;
 using KinoVerwaltungAPI.Dtos;
+using KinoVerwaltungAPI.Repositories.Interfaces;
 
 
 namespace KinoVerwaltungAPI.Repositories

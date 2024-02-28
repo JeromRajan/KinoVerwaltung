@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using KinoVerwaltungAPI.Models;
-using KinoVerwaltungAPI.Repositories;
 using System.Threading.Tasks;
+using KinoVerwaltungAPI.Repositories.Interfaces;
 
 namespace KinoVerwaltungAPI.Controllers
 {

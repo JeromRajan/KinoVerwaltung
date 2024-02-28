@@ -1,14 +1,15 @@
 ﻿using KinoVerwaltungAPI.Data;
 using KinoVerwaltungAPI.Models;
+using KinoVerwaltungAPI.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace KinoVerwaltungAPI.Repositories
 {
-    public class ZahlungsmethodeRepository : IZahlungsmethodeRepository
+    public class ZahlungRepository : IZahlungsRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public ZahlungsmethodeRepository(ApplicationDbContext context)
+        public ZahlungRepository(ApplicationDbContext context)
         {
             _context = context;
         }

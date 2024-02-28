@@ -1,16 +1,16 @@
 ﻿using KinoVerwaltungAPI.Models;
-using KinoVerwaltungAPI.Repositories;
+using KinoVerwaltungAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KinoVerwaltungAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ZahlungsmethodenController : ControllerBase
+    public class ZahlungController : ControllerBase
     {
-        private readonly IZahlungsmethodeRepository _zahlungsmethodeRepository;
+        private readonly IZahlungsRepository _zahlungsmethodeRepository;
 
-        public ZahlungsmethodenController(IZahlungsmethodeRepository zahlungsmethodeRepository)
+        public ZahlungController(IZahlungsRepository zahlungsmethodeRepository)
         {
             _zahlungsmethodeRepository = zahlungsmethodeRepository;
         }

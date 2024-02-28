@@ -1,6 +1,7 @@
 ﻿using KinoVerwaltungAPI.Data;
 using KinoVerwaltungAPI.Dtos;
 using KinoVerwaltungAPI.Models;
+using KinoVerwaltungAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;

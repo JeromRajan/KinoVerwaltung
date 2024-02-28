@@ -1,5 +1,5 @@
 ﻿using KinoVerwaltungAPI.Models;
-using KinoVerwaltungAPI.Repositories;
+using KinoVerwaltungAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KinoVerwaltungAPI.Controllers
@@ -15,6 +15,8 @@ namespace KinoVerwaltungAPI.Controllers
             _VorführungRepository = VorführungRepository;
         }
 
+        //Vorführungen-Endpunkte
+        #region Vorführungen
         [HttpGet]
         public async Task<IActionResult> GetAllVorführungen()
         {
@@ -66,7 +68,10 @@ namespace KinoVerwaltungAPI.Controllers
             await _VorführungRepository.DeleteVorführungAsync(id);
             return NoContent();
         }
+        #endregion
 
+        //Programm-Endpunkte
+        #region Programm
         [HttpGet("woche")]
         public async Task<IActionResult> GetProgrammFuerAktuelleWoche()
         {
@@ -80,5 +85,17 @@ namespace KinoVerwaltungAPI.Controllers
             var programm = await _VorführungRepository.GetProgrammFürHeuteAsync();
             return Ok(programm);
         }
+
+        #endregion
+        //Sitze-Endpunkte
+        #region Sitze
+        [HttpGet("{id}/sitze")]
+        public async Task<IActionResult> GetVorführungSitze(int id)
+        {
+            var vorführung = await _VorführungRepository.GetVorführungSitzeAsync(id);
+            return Ok(vorführung);
+        }
+
+        #endregion
     }
 }

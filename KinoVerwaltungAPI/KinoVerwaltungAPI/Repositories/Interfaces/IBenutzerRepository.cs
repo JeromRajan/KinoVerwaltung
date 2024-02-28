@@ -1,7 +1,7 @@
 ﻿using KinoVerwaltungAPI.Dtos;
 using KinoVerwaltungAPI.Models;
 
-namespace KinoVerwaltungAPI.Repositories
+namespace KinoVerwaltungAPI.Repositories.Interfaces
 {
     public interface IBenutzerRepository
     {
