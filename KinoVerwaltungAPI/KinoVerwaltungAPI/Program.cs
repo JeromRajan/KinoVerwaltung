@@ -11,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IKinoRepository, KinoRepository>();
 builder.Services.AddScoped<IFilmRepository, FilmRepository>();
 builder.Services.AddScoped<IVorführungRepository, VorführungRepository>();
+builder.Services.AddScoped<IBenutzerRepository, BenutzerRepository>();
 
 
 // Register your DbContext

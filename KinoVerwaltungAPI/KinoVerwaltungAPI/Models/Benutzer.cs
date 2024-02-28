@@ -22,12 +22,12 @@ namespace KinoVerwaltungAPI.Models
         public int RolleId { get; set; }
 
         // Navigation properties
-        public virtual Adresse Adresse { get; set; } 
+        public virtual Adresse? Adresse { get; set; } 
         public virtual ICollection<Ticket>? Tickets { get; set; }
 
-        public virtual ICollection<Rolle> Rollen { get; set; }
+        public virtual ICollection<Rolle>? Rollen { get; set; }
 
-        public virtual Rolle Rolle { get; set; }
-        public virtual Mitgliederkarte Mitgliederkarte { get; set; }
+        public virtual Rolle? Rolle { get; set; }
+        public virtual Mitgliederkarte? Mitgliederkarte { get; set; }
     }
 }
