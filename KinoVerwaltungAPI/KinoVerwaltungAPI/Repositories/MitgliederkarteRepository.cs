@@ -13,7 +13,8 @@ namespace KinoVerwaltungAPI.Repositories
         {
             _context = context;
         }
-
+        //Implementierung Mitgliederkarte Methoden
+        #region Mitgliederkarte
         public async Task<Mitgliederkarte> AddMitgliederkarteAsync()
         {
             var timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(); // Unix-Zeitstempel für Einzigartigkeit
@@ -37,22 +38,25 @@ namespace KinoVerwaltungAPI.Repositories
             return mitgliederkarte;
         }
 
-        public async Task AufladenAsync(int mitgliederkarteId, decimal betrag)
+        public async Task AufladenAsync(string identifikationsNummer, decimal betrag)
         {
-            var mitgliederkarte = await _context.Mitgliederkarten.FindAsync(mitgliederkarteId);
+            var mitgliederkarte = await _context.Mitgliederkarten.FirstOrDefaultAsync(m => m.IdentifikationsNummer == identifikationsNummer);
             if (mitgliederkarte == null) throw new Exception("Mitgliederkarte nicht gefunden.");
 
             mitgliederkarte.VerfügbareBetrag += betrag;
             await _context.SaveChangesAsync();
         }
+        #endregion
 
-
+        //Implementierung Mitgliederstatus Methoden
+        #region Mitgliederstatus
         public async Task<Mitgliederstatus> AddMitgliederstatus(Mitgliederstatus mitgliederstatus)
         {
             _context.Mitgliederstatus.Add(mitgliederstatus);
             await _context.SaveChangesAsync();
             return mitgliederstatus;
         }
+        #endregion
     }
 
 }

@@ -5,8 +5,8 @@ namespace KinoVerwaltungAPI.Models
     public class Mitgliederkarte
     {
         public int MitgliederkarteId { get; set; }
-
-        public decimal? VerfügbareBetrag { get; set; }
+        [Required]
+        public decimal VerfügbareBetrag { get; set; }
         public DateTime? Ablaufdatum { get; set; }
         [Required]
         public string IdentifikationsNummer { get; set; }

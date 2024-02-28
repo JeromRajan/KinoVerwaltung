@@ -26,12 +26,12 @@ namespace KinoVerwaltungAPI.Controllers
             return CreatedAtAction(nameof(AddMitgliederkarte), new { id = neueMitgliederkarte.MitgliederkarteId }, neueMitgliederkarte);
         }
 
-        [HttpPost("{mitgliederkarteId}/aufladen")]
-        public async Task<IActionResult> Aufladen(int mitgliederkarteId, [FromBody] decimal betrag)
+        [HttpPost("{identifikationsNummer}/aufladen")]
+        public async Task<IActionResult> Aufladen(string identifikationsNummer, [FromBody] decimal betrag)
         {
             try
             {
-                await _mitgliederkarteRepository.AufladenAsync(mitgliederkarteId, betrag);
+                await _mitgliederkarteRepository.AufladenAsync(identifikationsNummer, betrag);
                 return Ok();
             }
             catch (Exception ex)
