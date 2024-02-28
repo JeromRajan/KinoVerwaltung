@@ -188,6 +188,42 @@ namespace KinoVerwaltungAPI.Repositories
             return ticket;
         }
 
+        //Ticket im Kino erstellen
+        public async Task<Ticket> AddTicketInKinoAsync(int benutzerId, int vorführungId, int sitzId)
+        {
+            // Überprüfen, ob der Benutzer existiert
+            var benutzer = await _context.Benutzer.FindAsync(benutzerId);
+            if (benutzer == null) throw new Exception("Benutzer nicht gefunden.");
+
+            // Überprüfen, ob die Vorführung existiert
+            var vorführung = await _context.Vorführungen.FindAsync(vorführungId);
+            if (vorführung == null) throw new Exception("Vorführung nicht gefunden.");
+
+            // Überprüfen, ob der Sitz existiert, ob er frei ist und ob er in der Vorführung existiert
+            var sitz = await _context.Sitze.FindAsync(sitzId);
+            if (sitz == null) throw new Exception("Sitz nicht gefunden.");
+
+            //Überprüfen, ob es bereits ein Ticket für diesen Sitz und Vorführung gibt
+            var ticketCheck = await _context.Tickets.FirstOrDefaultAsync(t => t.SitzId == sitzId && t.VorführungId == vorführungId);
+            if (ticketCheck != null) throw new Exception("Sitz ist bereits besetzt.");
+
+            //Ticket erstellen
+            var ticket = new Ticket
+            {
+                BenutzerId = benutzerId,
+                VorführungId = vorführungId,
+                SitzId = sitzId,
+                Preis = vorführung.Preis,
+                Status = "Abgeschlossen",
+                ZahlungsmethodeId = 1, //Barzahlung
+                ReferenzNummer = "Kino"
+            };
+
+            _context.Tickets.Add(ticket);
+            await _context.SaveChangesAsync();
+            return ticket;
+        }
+
         #endregion
 
     }

@@ -58,6 +58,20 @@ namespace KinoVerwaltungAPI.Controllers
             }
         }
 
+        [HttpPost("InKino")]
+        public async Task<IActionResult> AddTicketInKino(int BenutzerId, int VorführungId, int SitzId)
+        {
+            try
+            {
+                var hinzugefügtesTicket = await _ticketRepository.AddTicketInKinoAsync(BenutzerId, VorführungId, SitzId);
+                return CreatedAtAction(nameof(AddTicketInKino), new { id = hinzugefügtesTicket.TicketId }, hinzugefügtesTicket);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         #endregion
     }
 

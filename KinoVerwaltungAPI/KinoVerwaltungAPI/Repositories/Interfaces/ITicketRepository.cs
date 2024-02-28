@@ -11,6 +11,9 @@ namespace KinoVerwaltungAPI.Repositories.Interfaces
         //Ticket resevierung im Kino bestätigen
         Task<Ticket> ConfirmTicketAsync(string referenzNummer);
 
+        //Ticket in Kino erstellen, dh die zahlungsmethodeId  ist immer 1 (Barzahlung) und das Ticket ist sofort bestätigt
+        Task<Ticket> AddTicketInKinoAsync(int benutzerId, int vorführungId, int sitzId);
+
 
 
     }
