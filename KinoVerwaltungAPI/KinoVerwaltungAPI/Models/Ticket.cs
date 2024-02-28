@@ -12,6 +12,9 @@ namespace KinoVerwaltungAPI.Models
         [Required]
         public string Status { get; set; }
 
+        [Required]
+        public string ReferenzNummer { get; set; }
+
         // Foreign keys
         public int VorführungId { get; set; } 
         public int SitzId { get; set; } 

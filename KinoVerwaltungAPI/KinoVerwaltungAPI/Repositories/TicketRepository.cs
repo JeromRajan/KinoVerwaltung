@@ -70,6 +70,16 @@ namespace KinoVerwaltungAPI.Repositories
                 rabatt = 5;
             }
 
+            //Generiere eine eindeutige Referenznummer
+            var timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(); // Unix-Zeitstempel für Einzigartigkeit
+            var randomPart = new Random().Next(100, 999); // Drei zufällige Ziffern für zusätzliche Einzigartigkeit
+
+            //Überprüfen, ob die Referenznummer bereits existiert
+            while (await _context.Tickets.AnyAsync(t => t.ReferenzNummer == $"{timestamp}-{randomPart}"))
+            {
+                randomPart = new Random().Next(100, 999);
+            }
+
             //Ticket erstellen
             var ticket = new Ticket
             {
@@ -78,7 +88,8 @@ namespace KinoVerwaltungAPI.Repositories
                 SitzId = sitzId,
                 Preis = vorführung.Preis - rabatt,
                 Status = "Reserviert",
-                ZahlungsmethodeId = zahlungsmethodeId
+                ZahlungsmethodeId = zahlungsmethodeId,
+                ReferenzNummer = $"{timestamp}-{randomPart}"
             };
 
             if (ticket != null) {
@@ -145,7 +156,8 @@ namespace KinoVerwaltungAPI.Repositories
                     SaalName = saal.Name,
                     Zahlungsmethode = zahlungsmethode.Name,
                     Kinoname = kino.Name,
-                    SitzReihe = sitzReihe.Nummer
+                    SitzReihe = sitzReihe.Nummer,
+                    ReferenzNummer = ticket.ReferenzNummer
                 };
                 ticketByUserDtos.Add(ticketByUserDto);
             }

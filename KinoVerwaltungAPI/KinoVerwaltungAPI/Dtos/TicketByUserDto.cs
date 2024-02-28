@@ -22,5 +22,7 @@ namespace KinoVerwaltungAPI.Dtos
 
         public string Kinoname { get; set; }
 
+        public string ReferenzNummer { get; set; }
+
     }
 }

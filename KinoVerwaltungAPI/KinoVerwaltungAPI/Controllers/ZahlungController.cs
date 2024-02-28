@@ -50,6 +50,46 @@ namespace KinoVerwaltungAPI.Controllers
         }
         #endregion
 
+        //Bezahlen-Endpunkte
+        #region Bezahlen
+        //Reservierte Ticket mit Mitgliederkarte bezahlen
+        [HttpPost("reservierung/mitgliederkarte")]
+        public async Task<IActionResult> ReservierungBezahlenMitMitgliederkarte(string referenzNummer, string identifikationsNummer)
+        {
+            try
+            {
+                var bezahlt = await _zahlungsmethodeRepository.ReservierungBezahlenMitMitgliederkarteAsync(referenzNummer, identifikationsNummer);
+                if (bezahlt)
+                {
+                    return Ok("Reservierung wurde bezahlt.");
+                }
+                return BadRequest("Reservierung konnte nicht bezahlt werden.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        //Reservierte Ticket bar bezahlen
+        [HttpPost("reservierung/bar")]
+        public async Task<IActionResult> ReservierungBezahlenBar(string referenzNummer)
+        {
+            try
+            {
+                var bezahlt = await _zahlungsmethodeRepository.ReservierungBezahlenBarAsync(referenzNummer);
+                if (bezahlt)
+                {
+                    return Ok("Reservierung wurde bezahlt.");
+                }
+                return BadRequest("Reservierung konnte nicht bezahlt werden.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
     }
 
 }
