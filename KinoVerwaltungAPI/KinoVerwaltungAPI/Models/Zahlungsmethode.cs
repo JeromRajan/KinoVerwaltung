@@ -12,7 +12,7 @@ namespace KinoVerwaltungAPI.Models
 
         // Navigation properties
 
-        public virtual ICollection<Ticket> Tickets { get; set; } 
-        public virtual ICollection<Mitgliederkarte> Mitgliederkarten { get; set; } 
+        public virtual ICollection<Ticket>? Tickets { get; set; } 
+        public virtual ICollection<Mitgliederkarte>? Mitgliederkarten { get; set; } 
     }
 }
