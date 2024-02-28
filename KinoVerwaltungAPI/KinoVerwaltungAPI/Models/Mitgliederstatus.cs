@@ -8,7 +8,7 @@ namespace KinoVerwaltungAPI.Models
         [Required]
         public string StatusName { get; set; }
         public decimal? Rabatt { get; set; }
-        public virtual ICollection<Benutzer> Benutzer { get; set; } // Navigation property
+        public virtual ICollection<Benutzer>? Benutzer { get; set; } // Navigation property
     }
 
 }

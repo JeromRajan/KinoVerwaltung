@@ -18,24 +18,33 @@ namespace KinoVerwaltungAPI.Repositories
             _passwordHasher = new PasswordHasher<Benutzer>();
         }
 
-        public async Task<Rolle> AddRolleAsync(Rolle rolle)
+        //Implementierung der Methoden des Interfaces IBenutzerRepository
+        #region Benutzer
+        public async Task<Benutzer> RegistrierenAsync(Benutzer benutzer, string passwort, Adresse adresse, string MitgliederkarteIdentifikationsNummer)
         {
-            _context.Rollen.Add(rolle);
-            await _context.SaveChangesAsync();
-            return rolle;
-        }
+            //überprüfen, ob die Mitgliederkarte existiert und noch nicht verwendet wurde
+            if (!string.IsNullOrEmpty(MitgliederkarteIdentifikationsNummer))
+            {
+                var mitgliederkarte = await _context.Mitgliederkarten
+                    .FirstOrDefaultAsync(m => m.IdentifikationsNummer == MitgliederkarteIdentifikationsNummer);
 
-        public async Task<Benutzer> RegistrierenAsync(Benutzer benutzer, string passwort, Adresse adresse)
-        {
+                if (mitgliederkarte == null)
+                {
+                    throw new Exception("Die Mitgliederkarte existiert nicht.");
+                }
+                if (mitgliederkarte.BenutzerId != null)
+                {
+                    throw new Exception("Die Mitgliederkarte wurde bereits verwendet.");
+                }                
+            }
+
             // Überprüfen, ob eine E-Mail-Adresse bereits existiert
             var existierenderBenutzer = await _context.Benutzer
                 .AsNoTracking()
                 .FirstOrDefaultAsync(u => u.Email.ToLower() == benutzer.Email.ToLower());
 
             if (existierenderBenutzer != null)
-            {
-                // Werfen Sie eine spezifische Ausnahme oder geben Sie ein spezifisches Ergebnis zurück,
-                // um anzugeben, dass die E-Mail-Adresse bereits verwendet wird.
+            {              
                 throw new Exception("Die E-Mail-Adresse wird bereits verwendet.");
             }
 
@@ -66,10 +75,20 @@ namespace KinoVerwaltungAPI.Repositories
                 await _context.SaveChangesAsync(); // AdresseId wird generiert
                 benutzer.AdresseId = adresse.AdresseId;
             }
-
+            
             // Benutzer hinzufügen
             _context.Benutzer.Add(benutzer);
             await _context.SaveChangesAsync();
+
+            // Mitgliederkarte zuweisen
+            if (!string.IsNullOrEmpty(MitgliederkarteIdentifikationsNummer))
+            {
+                var mitgliederkarte = await _context.Mitgliederkarten
+                    .FirstOrDefaultAsync(m => m.IdentifikationsNummer == MitgliederkarteIdentifikationsNummer);
+                mitgliederkarte.BenutzerId = benutzer.BenutzerId;
+                await _context.SaveChangesAsync();
+            }
+
             return benutzer;
         }
 
@@ -135,12 +154,21 @@ namespace KinoVerwaltungAPI.Repositories
                 }
             }
             
-
             // Aktualisieren des Benutzers
             _context.Benutzer.Update(benutzer);
             await _context.SaveChangesAsync();
         }
+        #endregion
 
+        // Implementierung der Methode für Rollen
+        #region Rollen
+        public async Task<Rolle> AddRolleAsync(Rolle rolle)
+        {
+            _context.Rollen.Add(rolle);
+            await _context.SaveChangesAsync();
+            return rolle;
+        }
+        #endregion
 
     }
 

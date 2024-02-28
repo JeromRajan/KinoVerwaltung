@@ -49,16 +49,17 @@ namespace KinoVerwaltungAPI.Controllers
 
             try
             {
-                await _benutzerRepository.RegistrierenAsync(benutzer, dto.Passwort, adresse);
+                await _benutzerRepository.RegistrierenAsync(benutzer, dto.Passwort, adresse, dto.MitgliederkarteIdentifikationsNummer );
                 // Passwort und AdresseId sollten nicht zurückgegeben werden
                 return CreatedAtAction(nameof(Registrieren), new { id = benutzer.BenutzerId }, benutzer);
             }
             catch (Exception ex)
             {
-                if (ex.Message == "Die E-Mail-Adresse wird bereits verwendet.")
+                if (ex.Message == "Die Mitgliederkarte existiert nicht." || ex.Message == "Die Mitgliederkarte wurde bereits verwendet." || ex.Message == "Die E-Mail-Adresse wird bereits verwendet.")
                 {
                     return BadRequest(ex.Message);
                 }
+       
                 return BadRequest("Ein unbekannter Fehler ist aufgetreten.");
             }
         }

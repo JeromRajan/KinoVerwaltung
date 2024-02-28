@@ -13,6 +13,8 @@
         public int RolleId { get; set; }
 
         public AdresseDto Adresse { get; set; }
+
+        public string MitgliederkarteIdentifikationsNummer { get; set; }
     }
 
 }
