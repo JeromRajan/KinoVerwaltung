@@ -8,5 +8,10 @@ namespace KinoVerwaltungAPI.Repositories.Interfaces
         Task<Ticket> AddTicketAsync(int benutzerId, int vorführungId, int sitzId, int zahlungsmethodeId);
         Task<IEnumerable<TicketByUserDto>> GetTicketsByBenutzerIdAsync(int benutzerId);
 
+        //Ticket resevierung im Kino bestätigen
+        Task<Ticket> ConfirmTicketAsync(string referenzNummer);
+
+
+
     }
 }

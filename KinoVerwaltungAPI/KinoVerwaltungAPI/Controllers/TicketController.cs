@@ -44,6 +44,20 @@ namespace KinoVerwaltungAPI.Controllers
             return Ok(ticket);
         }
 
+        [HttpPost("{TicketReferenzNummer}")]
+        public async Task<IActionResult> ConfirmTicket(string TicketReferenzNummer)
+        {
+            try
+            {
+                var bestätigtesTicket = await _ticketRepository.ConfirmTicketAsync(TicketReferenzNummer);
+                return Ok(bestätigtesTicket);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         #endregion
     }
 

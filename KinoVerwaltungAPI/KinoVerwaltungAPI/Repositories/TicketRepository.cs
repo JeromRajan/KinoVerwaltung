@@ -167,6 +167,27 @@ namespace KinoVerwaltungAPI.Repositories
 
         }
 
+        //Ticket bestätigen
+        public async Task<Ticket> ConfirmTicketAsync(string referenzNummer)
+        {
+            //Ticket abfragen
+            var ticket = await _context.Tickets.FirstOrDefaultAsync(t => t.ReferenzNummer == referenzNummer);
+            if (ticket == null) throw new Exception("Ticket nicht gefunden.");
+
+            //Schauen, ob das Ticket bereits abgeschlossen ist
+            if (ticket.Status == "Abgeschlossen") throw new Exception("Ticket bereits abgeholt.");
+
+            //Schauen, ob das Ticket noch nicht bezahlt ist
+            if (ticket.Status != "Bezahlt") throw new Exception("Ticket noch nicht bezahlt.");
+
+            //Ticket Status auf "Abgeschlossen" setzen
+            ticket.Status = "Abgeschlossen";
+            _context.Tickets.Update(ticket);
+            await _context.SaveChangesAsync();
+
+            return ticket;
+        }
+
         #endregion
 
     }
