@@ -16,7 +16,7 @@ builder.Services.AddScoped<IBenutzerRepository, BenutzerRepository>();
 builder.Services.AddScoped<IZahlungsRepository, ZahlungRepository>();
 builder.Services.AddScoped<IMitgliederkarteRepository, MitgliederkarteRepository>();
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
-
+builder.Services.AddScoped<IStatistikRepository, StatistikRepository>();
 
 // Register your DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
