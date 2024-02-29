@@ -1,0 +1,16 @@
+{
+  "HelloWorld": "Hallo Welt",
+  "Navigation": {
+    "movies": "Filme",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "logout": "Abmelden",
+    "languages": "Sprachen",
+    "english": "Englisch",
+    "german": "Deutsch",
+    "french": "Französisch",
+    "memberarea": "Mitgliederbereich",
+    "statistics": "Statistiken",
+    "administation": "Verwaltung"
+  }
+}
