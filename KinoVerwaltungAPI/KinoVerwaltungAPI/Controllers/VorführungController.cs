@@ -68,6 +68,14 @@ namespace KinoVerwaltungAPI.Controllers
             await _VorführungRepository.DeleteVorführungAsync(id);
             return NoContent();
         }
+
+        [HttpGet("kino/{kinoId}/saal/{saalId}")]
+        public async Task<IActionResult> GetVorführungenFürKinoUndSaal(int kinoId, int saalId)
+        {
+            var vorführungen = await _VorführungRepository.GetVorführungenFürKinoUndSaalAsync(kinoId, saalId);
+            return Ok(vorführungen);
+        }
+
         #endregion
 
         //Programm-Endpunkte
@@ -83,6 +91,20 @@ namespace KinoVerwaltungAPI.Controllers
         public async Task<IActionResult> GetProgrammFuerHeute()
         {
             var programm = await _VorführungRepository.GetProgrammFürHeuteAsync();
+            return Ok(programm);
+        }
+
+        [HttpGet("heute/{kinoId}/{saalId}")]
+        public async Task<IActionResult> GetProgrammFuerHeute(int kinoId, int saalId)
+        {
+            var programm = await _VorführungRepository.GetProgrammFürHeuteAsync(kinoId, saalId);
+            return Ok(programm);
+        }
+
+        [HttpGet("woche/{kinoId}/{saalId}")]
+        public async Task<IActionResult> GetProgrammFuerAktuelleWoche(int kinoId, int saalId)
+        {
+            var programm = await _VorführungRepository.GetProgrammFürAktuelleWocheAsync(kinoId, saalId);
             return Ok(programm);
         }
 

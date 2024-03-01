@@ -18,6 +18,23 @@
     "cinema": "Cinema",
     "hall": "Hall",
     "noHallInfo": "No cinema halls available in the selected cinema",
-    "genre": "Genre"
+    "noMovies": "No movies available",
+    "allMovies": "All Movies",
+    "dailyMovies": "Daily Movies",
+    "weeklyMovies": "Weekly Movies",
+    "date": "Date",
+    "time": "Time",
+    "showTitle": "Title",
+    "duration": "Duration",
+    "price": "Price",
+    "seats": "Seats",
+    "description": "Description",
+    "ageRestriction": "Age Restriction",
+    "detailView": "Detail View",
+    "hours": "Hours",
+    "language": "Language",
+    "minutes": "Minutes",
+    "genre": "Genre",
+    "seeDetails": "See Details"
   }
 }

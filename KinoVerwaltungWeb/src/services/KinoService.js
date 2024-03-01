@@ -30,13 +30,51 @@ class KinoService {
   getHallByKinoId = async (kinoId) => {
     try {
       const response = await axios.get(`${this.BASE_URL}/Kino/${kinoId}/saele`);
-      console.log(response.data);
       if(response && response.data && response.data.saele  && response.data.saele.$values && response.data.saele.$values.length > 0){
         return response.data.saele.$values || [];
       }
       return [];
     } catch (error) {
       console.error('Failed to fetch hall', error);
+      throw error;
+    }
+  }
+
+  getMoviesByKinoIdAndHallId = async (kinoId, hallId) => {
+    try {
+      const response = await axios.get(`${this.BASE_URL}/Vorführung/Kino/${kinoId}/saal/${hallId}`);
+      if(response && response.data && response.data.$values && response.data.$values.length > 0){
+        return response.data.$values || [];
+      }
+      return [];
+    } catch (error) {
+      console.error('Failed to fetch movies', error);
+      throw error;
+    }
+  }
+
+  getDailyProgramByKinoIdAndHallId = async (kinoId, hallId) => {
+    try {
+      const response = await axios.get(`${this.BASE_URL}/Vorführung/heute/${kinoId}/${hallId}`);
+      if(response && response.data && response.data.$values && response.data.$values.length > 0){
+        return response.data.$values || [];
+      }
+      return [];
+    } catch (error) {
+      console.error('Failed to fetch daily program', error);
+      throw error;
+    }
+  }
+
+  getWeeklyProgramByKinoIdAndHallId = async (kinoId, hallId) => {
+    try {
+      const response = await axios.get(`${this.BASE_URL}/Vorführung/woche/${kinoId}/${hallId}`);
+      if(response && response.data && response.data.$values && response.data.$values.length > 0){
+        return response.data.$values || [];
+      }
+      return [];
+    } catch (error) {
+      console.error('Failed to fetch weekly program', error);
       throw error;
     }
   }

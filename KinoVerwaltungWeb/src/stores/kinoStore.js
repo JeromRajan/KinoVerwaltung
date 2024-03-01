@@ -20,11 +20,24 @@ export const useKinoStore = defineStore('kino', {
       }
     },
     async fetchHall(kinoId) {
+      this.movies = [];
       const kinoService = KinoService.getInstance()
       this.halls = await kinoService.getHallByKinoId(kinoId)
       if(this.halls.length > 0) {
         this.currentHall = this.halls[0]
       }
+    },
+    async fetchMovies() {
+      const kinoService = KinoService.getInstance()
+      this.movies = await kinoService.getMoviesByKinoIdAndHallId(this.currentKino.kinoId, this.currentHall.saalId)
+    },
+    async fetchDailyProgram() {
+      const kinoService = KinoService.getInstance()
+      this.movies = await kinoService.getDailyProgramByKinoIdAndHallId(this.currentKino.kinoId, this.currentHall.saalId)
+    },
+    async fetchWeeklyProgram() {
+      const kinoService = KinoService.getInstance()
+      this.movies = await kinoService.getWeeklyProgramByKinoIdAndHallId(this.currentKino.kinoId, this.currentHall.saalId)
     },
     setCurrentKino(kino) {
       this.currentKino = kino

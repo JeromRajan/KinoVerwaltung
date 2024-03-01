@@ -13,7 +13,15 @@ namespace KinoVerwaltungAPI.Repositories.Interfaces
         Task<IEnumerable<Vorführung>> GetProgrammFürAktuelleWocheAsync();
         Task<IEnumerable<Vorführung>> GetProgrammFürHeuteAsync();
 
-        // Echzeit Informationen über verfügbare Sitze
+        //Get Programm für heute abhängig von Kino und Saal
+        Task<IEnumerable<VorführungDto>> GetProgrammFürHeuteAsync(int kinoId, int saalId);
+
+        //Get Programm für aktuelle Woche abhängig von Kino und Saal
+        Task<IEnumerable<VorführungDto>> GetProgrammFürAktuelleWocheAsync(int kinoId, int saalId);
+
+        //Get Alle gültigen Vorführungen für einen kino und Saal
+        Task<IEnumerable<VorführungDto>> GetVorführungenFürKinoUndSaalAsync(int kinoId, int saalId);
+
         Task<VorführungSaalDto> GetVorführungSitzeAsync(int vorführungId);
     }
 }

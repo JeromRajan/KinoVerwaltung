@@ -66,6 +66,52 @@ namespace KinoVerwaltungAPI.Repositories
             }
         }
 
+        public async Task<IEnumerable<VorführungDto>> GetVorführungenFürKinoUndSaalAsync(int kinoId, int saalId)
+        {
+            List<VorführungDto> vorführungenDto = new List<VorführungDto>();
+            // Lade alle Vorführungen
+            var vorführungen = await _context.Vorführungen
+                .Include(v => v.Film)
+                .Where(v => v.SaalId == saalId && v.Saal.KinoId == kinoId)
+                .ToListAsync();
+            
+            if (vorführungen == null)
+            {
+            throw new Exception("Keine Vorführungen gefunden.");
+            }
+
+            foreach (var vorführung in vorführungen)
+            {
+                //Film holen
+                var film = await _context.Filme.FindAsync(vorführung.FilmId);
+
+                //Genre holen
+                var genre = await _context.Genres.FindAsync(film.GenreId);
+
+                //Sprache holen
+                var sprache = await _context.Sprachen.FindAsync(film.SpracheId);
+
+               //VorführungDto hinzufügen
+               var vorführungDto = new VorführungDto()
+               {
+                    VorführungId = vorführung.VorführungId,
+                    SaalId = vorführung.SaalId,
+                    Datum = vorführung.StartZeit.Date,
+                    StartZeit = vorführung.StartZeit,
+                    Preis = vorführung.Preis,
+                    FilmTitel = film.Titel,
+                    FilmBeschreibung = film.Beschreibung,
+                    FilmGenre = genre.Name,
+                    FilmDauer = film.Dauer,
+                    FilmFSK = film.Altersfreigabe,
+                    FilmSprache = sprache.Name
+                };
+                vorführungenDto.Add(vorführungDto);
+            }
+
+            return vorführungenDto;
+        }
+
         #endregion
 
         // Implementierung der Methoden für das Programm
@@ -88,6 +134,107 @@ namespace KinoVerwaltungAPI.Repositories
                 .Where(v => v.StartZeit >= today && v.StartZeit < tomorrow)
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<VorführungDto>> GetProgrammFürHeuteAsync(int kinoId, int saalId)
+        {
+        
+            List<VorführungDto> vorführungenDto = new List<VorführungDto>();
+
+            var today = DateTime.Today;
+            var tomorrow = today.AddDays(1);
+
+            // Lade alle Vorführungen
+            var vorführungen = await _context.Vorführungen
+                .Where(v => v.StartZeit >= today && v.StartZeit < tomorrow && v.SaalId == saalId && v.Saal.KinoId == kinoId)
+                .ToListAsync();
+
+            if (vorführungen == null)
+            {
+                throw new Exception("Keine Vorführungen gefunden.");
+            }
+
+            foreach (var vorführung in vorführungen)
+            {
+                //Film holen
+                var film = await _context.Filme.FindAsync(vorführung.FilmId);
+
+                //Genre holen
+                var genre = await _context.Genres.FindAsync(film.GenreId);
+
+                //Sprache holen
+                var sprache = await _context.Sprachen.FindAsync(film.SpracheId);
+
+                //VorführungDto hinzufügen
+                var vorführungDto = new VorführungDto()
+                {
+                    VorführungId = vorführung.VorführungId,
+                    SaalId = vorführung.SaalId,
+                    Datum = vorführung.StartZeit.Date,
+                    StartZeit = vorführung.StartZeit,
+                    Preis = vorführung.Preis,
+                    FilmTitel = film.Titel,
+                    FilmBeschreibung = film.Beschreibung,
+                    FilmGenre = genre.Name,
+                    FilmDauer = film.Dauer,
+                    FilmFSK = film.Altersfreigabe,
+                    FilmSprache = sprache.Name
+                };
+                vorführungenDto.Add(vorführungDto);
+            }
+
+            return vorführungenDto;
+        }
+
+        public async Task<IEnumerable<VorführungDto>> GetProgrammFürAktuelleWocheAsync(int kinoId, int saalId)
+        {
+            
+            List<VorführungDto> vorführungenDto = new List<VorführungDto>();
+
+            var startOfWeek = DateTime.Now.StartOfWeek(DayOfWeek.Monday);
+            var endOfWeek = startOfWeek.AddDays(7);
+
+            // Lade alle Vorführungen
+            var vorführungen = await _context.Vorführungen
+                .Where(v => v.StartZeit >= startOfWeek && v.StartZeit < endOfWeek && v.SaalId == saalId && v.Saal.KinoId == kinoId)
+                .ToListAsync();
+
+            if (vorführungen == null)
+            {
+                throw new Exception("Keine Vorführungen gefunden.");
+            }
+
+            foreach (var vorführung in vorführungen)
+            {
+                //Film holen
+                var film = await _context.Filme.FindAsync(vorführung.FilmId);
+
+                //Genre holen
+                var genre = await _context.Genres.FindAsync(film.GenreId);
+
+                //Sprache holen
+                var sprache = await _context.Sprachen.FindAsync(film.SpracheId);
+
+                //VorführungDto hinzufügen
+                var vorführungDto = new VorführungDto()
+                {
+                    VorführungId = vorführung.VorführungId,
+                    SaalId = vorführung.SaalId,
+                    Datum = vorführung.StartZeit.Date,
+                    StartZeit = vorführung.StartZeit,
+                    Preis = vorführung.Preis,
+                    FilmTitel = film.Titel,
+                    FilmBeschreibung = film.Beschreibung,
+                    FilmGenre = genre.Name,
+                    FilmDauer = film.Dauer,
+                    FilmFSK = film.Altersfreigabe,
+                    FilmSprache = sprache.Name
+                };
+                vorführungenDto.Add(vorführungDto);
+            }
+
+            return vorführungenDto;
+        }
+
         #endregion
 
         // Implementierung der Methode Sitzeverfügbarkeit

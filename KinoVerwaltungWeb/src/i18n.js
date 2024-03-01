@@ -16,4 +16,6 @@ export function installI18n(app) {
   });
   app.use(i18n);
   return i18n;
+
+
 }
