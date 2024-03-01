@@ -1,10 +1,12 @@
-<script setup lang="ts">
+<template>
+  <div>
+    Member Area
+  </div>
+</template>
+
+<script>
 
 </script>
-
-<template>
-<div>Member</div>
-</template>
 
 <style scoped>
 

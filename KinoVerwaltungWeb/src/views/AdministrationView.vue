@@ -1,12 +1,12 @@
-<script setup lang="ts">
+<template>
+  <div>
+    Administration
+  </div>
+</template>
+
+<script>
 
 </script>
-
-<template>
-<div>
-  Administration
-</div>
-</template>
 
 <style scoped>
 

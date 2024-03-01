@@ -1,5 +1,4 @@
 {
-  "HelloWorld": "Hello World",
   "Navigation": {
     "movies": "Movies",
     "login": "Login",
@@ -12,5 +11,11 @@
     "memberarea": "Memberarea",
     "statistics": "Statistics",
     "administation": "Administation"
+  },
+  "Movies": {
+    "title": "Movies",
+    "search": "Search",
+    "cinema": "Cinema",
+    "genre": "Genre"
   }
 }

@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import { RouterView } from 'vue-router'
-</script>
+
 
 <template>
   <v-app>
@@ -49,24 +47,33 @@ import { RouterView } from 'vue-router'
       </v-menu>
     </v-app-bar>
 
-    <v-main>
+    <v-main class="pl-15 pr-15">
       <RouterView />
     </v-main>
   </v-app>
 </template>
 
-<script lang="ts">
+<script>
+import { RouterView } from 'vue-router'
 import { useLanguageStore } from '@/stores/languageStore'
+import { useKinoStore } from '@/stores/kinoStore'
 
 export default {
+  components: {
+    RouterView
+  },
   name: 'TopMovie',
   data() {
     return {
       languageStore: useLanguageStore(),
+      useKinoStore: useKinoStore()
     }
   },
+  created() {
+    this.useKinoStore.fetchKino();
+  },
   methods: {
-    changeLanguage(lang: string) {
+    changeLanguage(lang) {
       this.languageStore.setLanguage(lang);
     }
   }

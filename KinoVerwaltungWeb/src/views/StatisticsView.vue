@@ -1,12 +1,12 @@
-<script setup lang="ts">
+<template>
+  <div>
+    Statistics
+  </div>
+</template>
+
+<script>
 
 </script>
-
-<template>
-<div>
-  Statistik
-</div>
-</template>
 
 <style scoped>
 
