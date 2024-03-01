@@ -18,26 +18,17 @@ import {useLanguageStore} from '@/stores/languageStore'
 
 import '@mdi/font/css/materialdesignicons.css'
 
-// Create the Vuetify instance
 const vuetify = createVuetify({
   components,
   directives,
 })
 
-// Create the app
 const app = createApp(App)
 
-// Use the plugins
 app.use(vuetify)
 app.use(createPinia())
 app.use(router)
 
-// Global variables
-const globals = app.config.globalProperties
-globals.BASE_URL = 'https://localhost:44336/api'
-export { globals }
-
-// i18n
 const i18n = installI18n(app)
 
 app.mount('#app')

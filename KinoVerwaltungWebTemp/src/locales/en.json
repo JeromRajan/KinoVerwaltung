@@ -16,8 +16,6 @@
     "title": "Movies",
     "search": "Search",
     "cinema": "Cinema",
-    "hall": "Hall",
-    "noHallInfo": "No cinema halls available in the selected cinema",
     "genre": "Genre"
   }
 }
