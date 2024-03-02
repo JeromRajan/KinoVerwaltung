@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import KinoService from '@/services/KinoService.js'
+import KinoService from '@/services/kinoService.js'
 
 export const useKinoStore = defineStore('kino', {
   state: () => ({
@@ -8,22 +8,22 @@ export const useKinoStore = defineStore('kino', {
     currentKino: null,
     currentHall: null,
     movies: [],
-    currentMovie: null,
+    currentMovie: null
   }),
   actions: {
     async fetchKino() {
       const kinoService = KinoService.getInstance()
       this.kinos = await kinoService.getAllKinos()
-      if(this.kinos.length > 0) {
+      if (this.kinos.length > 0) {
         this.currentKino = this.kinos[0]
         this.fetchHall(this.currentKino.kinoId)
       }
     },
     async fetchHall(kinoId) {
-      this.movies = [];
+      this.movies = []
       const kinoService = KinoService.getInstance()
       this.halls = await kinoService.getHallByKinoId(kinoId)
-      if(this.halls.length > 0) {
+      if (this.halls.length > 0) {
         this.currentHall = this.halls[0]
       }
     },
@@ -42,6 +42,11 @@ export const useKinoStore = defineStore('kino', {
     setCurrentKino(kino) {
       this.currentKino = kino
       this.fetchHall(kino.kinoId)
+    },
+    setCurrentMovie(movie) {
+      console.log(movie)
+      this.currentMovie = movie
+
     }
   },
   getters: {

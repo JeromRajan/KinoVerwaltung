@@ -36,5 +36,35 @@
     "minutes": "Minutes",
     "genre": "Genre",
     "seeDetails": "See Details"
+  },
+  "Login": {
+    "password": "Password",
+    "login": "Login",
+    "loginError": "Login failed. Please check your credentials.",
+    "loginSuccess": "Login successful.",
+    "account": "Account",
+    "emailAdress": "Email Adress",
+    "enterPassword": "Enter your password"
+  },
+  "Register": {
+    "register": "Register",
+    "registerError": "Registration failed. Please check your credentials.",
+    "registerSuccess": "Registration successful.",
+    "emailAdress": "Email Adress",
+    "enterPassword": "Enter your password",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordError": "Passwords do not match.",
+    "membercardIdentificationNumber": "Membercard Identification Number",
+    "membercardIdentificationInfo": "You can only register if you have a membercard. You can obtain a membercard at the cinema.",
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "street": "Street",
+    "city": "City",
+    "zip": "ZIP",
+    "country": "Country",
+    "phone": "Phone",
+    "streetNumber": "Street Number",
+    "fieldRequired": "This field is required."
   }
 }

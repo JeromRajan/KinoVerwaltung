@@ -21,8 +21,16 @@
           {{ $t('Navigation.administation') }}
         </v-btn>
       </v-toolbar-title>
-      <v-btn text to="/login"><v-icon icon="mdi-login" class="mr-2"/> {{$t('Navigation.login')}}</v-btn>
-      <v-btn text to="/register"><v-icon icon="mdi-account-plus" class="mr-2"/>  {{$t('Navigation.register')}}</v-btn>
+      <div v-if="!useUserStore.user" >
+        <v-btn text to="/login"><v-icon icon="mdi-login" class="mr-2"/> {{$t('Navigation.login')}}</v-btn>
+        <v-btn text to="/register"><v-icon icon="mdi-account-plus" class="mr-2"/>  {{$t('Navigation.register')}}</v-btn>
+      </div>
+      <div v-else>
+        <v-icon icon="mdi-account" class="mr-2"/> {{useUserStore.user.vorname}} {{useUserStore.user.nachname}}
+        <v-btn text @click="logout"><v-icon icon="mdi-logout" class="mr-2"/> {{$t('Navigation.logout')}}</v-btn>
+      </div>
+
+
       |
       <v-menu location="bottom">
         <template v-slot:activator="{ props }">
@@ -57,6 +65,7 @@
 import { RouterView } from 'vue-router'
 import { useLanguageStore } from '@/stores/languageStore'
 import { useKinoStore } from '@/stores/kinoStore'
+import { useUserStore } from '@/stores/userStore'
 
 export default {
   components: {
@@ -66,7 +75,8 @@ export default {
   data() {
     return {
       languageStore: useLanguageStore(),
-      useKinoStore: useKinoStore()
+      useKinoStore: useKinoStore(),
+      useUserStore: useUserStore()
     }
   },
   created() {
@@ -75,6 +85,9 @@ export default {
   methods: {
     changeLanguage(lang) {
       this.languageStore.setLanguage(lang);
+    },
+    logout() {
+      this.useUserStore.logout();
     }
   }
 

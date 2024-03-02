@@ -47,11 +47,17 @@
       :items="movies"
       :search="search"
       >
+        <template v-slot:item.detail="{ item }">
+          <v-btn
+            color="primary"
+            @click="setMovie(item)"
+          >
+            {{ $t('Movies.seeDetails') }}
+          </v-btn>
+        </template>
 
       </v-data-table>
     </v-card>
-
-
   </v-sheet>
 </template>
 
@@ -61,7 +67,6 @@ import { useKinoStore } from '@/stores/kinoStore.js'
 
 export default defineComponent({
   name: 'filmOverview',
-
   data: () => {
     return {
       useKinoStore: useKinoStore(),
@@ -102,6 +107,11 @@ export default defineComponent({
     }
   },
   methods: {
+    setMovie(movie) {
+      this.useKinoStore.setCurrentMovie(movie)
+      this.$router.push({ name: 'MovieDetail', params: { id: movie.detail }});
+    },
+
     fillMovies() {
       this.useKinoStore.movies.forEach(movie => {
         this.movies.push({
