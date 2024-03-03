@@ -33,6 +33,12 @@ namespace KinoVerwaltungAPI.Repositories
 
         public async Task AddVorführungAsync(Vorführung vorführung)
         {
+            //Film holen
+            var film = await _context.Filme.FindAsync(vorführung.FilmId);
+
+            //Endzeit nach der Film Dauer setzen
+            vorführung.EndZeit = vorführung.StartZeit.AddMinutes(film.Dauer);
+
             // Überprüfen Sie, ob bereits eine Vorführung im gewählten Saal zur gewünschten Zeit existiert
             var konfliktVorfuehrung = await _context.Vorführungen
                 .AnyAsync(v => v.SaalId == vorführung.SaalId &&
@@ -52,6 +58,27 @@ namespace KinoVerwaltungAPI.Repositories
 
         public async Task UpdateVorführungAsync(Vorführung vorführung)
         {
+            //Film holen
+            var film = await _context.Filme.FindAsync(vorführung.FilmId);
+            if (film == null)
+            {
+                throw new Exception("Film nicht gefunden.");
+            }
+
+            //Endzeit nach der Film Dauer setzen
+            vorführung.EndZeit = vorführung.StartZeit.AddMinutes(film.Dauer);
+
+
+            // Überprüfen Sie, ob bereits eine Vorführung im gewählten Saal zur gewünschten Zeit existiert
+            var konfliktVorfuehrung = await _context.Vorführungen
+                .AnyAsync(v => v.SaalId == vorführung.SaalId &&
+                               ((v.StartZeit < vorführung.EndZeit && v.EndZeit > vorführung.StartZeit)));
+            if (konfliktVorfuehrung)
+            {
+                // Wirf eine Ausnahme oder gebe einen Fehler zurück
+                throw new Exception("Der Saal ist zur gewählten Start- und Endzeit nicht verfügbar.");
+            }
+
             _context.Vorführungen.Update(vorführung);
             await _context.SaveChangesAsync();
         }
@@ -99,6 +126,7 @@ namespace KinoVerwaltungAPI.Repositories
                     Datum = vorführung.StartZeit.Date,
                     StartZeit = vorführung.StartZeit,
                     Preis = vorführung.Preis,
+                    FilmId = vorführung.FilmId,
                     FilmTitel = film.Titel,
                     FilmBeschreibung = film.Beschreibung,
                     FilmGenre = genre.Name,

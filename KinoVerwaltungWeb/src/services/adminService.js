@@ -181,6 +181,59 @@ class AdminService {
     }
   }
 
+  getShowsByCinemaIdAndHallId = async (kinoId, hallId) => {
+    try {
+      const response = await axios.get(`${this.BASE_URL}/Vorführung/Kino/${kinoId}/saal/${hallId}`);
+      if(response && response.data){
+        return response.data;
+      }
+      return [];
+    } catch (error) {
+      console.error('Failed to get shows', error);
+      throw error;
+    }
+  }
+
+  deleteShow = async (showId) => {
+    try {
+      const response = await axios.delete(`${this.BASE_URL}/Vorführung/${showId}`);
+      if(response && response.data){
+        return response.data;
+      }
+      return [];
+    } catch (error) {
+      console.error('Failed to delete show', error);
+      throw error;
+    }
+  }
+
+  addShow = async (show) => {
+    try {
+      const response = await axios.post(`${this.BASE_URL}/Vorführung`, show);
+      if(response && response.data){
+        return response.data;
+      }
+      return [];
+    } catch (error) {
+      console.error('Failed to add show', error);
+      throw error;
+    }
+  }
+
+  updateShow = async (show) => {
+    console.log(show);
+    try {
+      const response = await axios.put(`${this.BASE_URL}/Vorführung/${show.vorführungId}`, show);
+      if(response && response.data){
+        return response.data;
+      }
+      return [];
+    } catch (error) {
+      console.error('Failed to update show', error);
+      throw error;
+    }
+  }
+
 
 }
 

@@ -25,7 +25,6 @@
       {{ errorMessage }}
     </v-alert>
 
-
     <v-progress-linear
       v-if="isLoading"
       color="blue"
@@ -33,6 +32,7 @@
     </v-progress-linear>
 
     <v-alert
+      class="mb-5"
       v-if="saals.length === 0"
       dismissible
       type="info"

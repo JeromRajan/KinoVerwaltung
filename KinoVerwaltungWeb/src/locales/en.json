@@ -112,6 +112,10 @@
     "rowNumber": "Number of Rows",
     "noSaal": "No cinema halls available in the selected cinema",
     "addHallToCinema": "Add Hall to Cinema",
-    "editHall": "Edit Hall"
+    "editHall": "Edit Hall",
+    "noShows": "No shows available",
+    "addShow": "Add Show",
+    "startTime": "Start Time",
+    "date": "Date"
   }
 }

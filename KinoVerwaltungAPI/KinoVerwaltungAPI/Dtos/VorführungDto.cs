@@ -11,6 +11,8 @@
         public DateTime StartZeit { get; set; }
         public decimal Preis { get; set; }
 
+        public int FilmId { get; set; }
+
         public string FilmTitel { get; set; }
         public string FilmBeschreibung { get; set; }
         public string FilmGenre { get; set; }
