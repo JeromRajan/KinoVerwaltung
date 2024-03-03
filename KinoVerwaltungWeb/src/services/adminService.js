@@ -116,6 +116,71 @@ class AdminService {
     }
   }
 
+  getSaalsinfoByCinema = async (kinoId) => {
+    try {
+      const response = await axios.get(`${this.BASE_URL}/Kino/${kinoId}/saeleinfo`);
+      if(response && response.data){
+        return response.data;
+      }
+      return [];
+    } catch (error) {
+      console.error('Failed to get saals', error);
+      throw error;
+    }
+  }
+
+  deleteSaal = async (saalId) => {
+    try {
+      const response = await axios.delete(`${this.BASE_URL}/Kino/saal/${saalId}`);
+      if(response && response.data){
+        return response.data;
+      }
+      return [];
+    } catch (error) {
+      console.error('Failed to delete saal', error);
+      throw error;
+    }
+  }
+
+  getCinemas = async () => {
+    try {
+      const response = await axios.get(`${this.BASE_URL}/Kino`);
+      if(response && response.data){
+        return response.data;
+      }
+      return [];
+    } catch (error) {
+      console.error('Failed to get cinemas', error);
+      throw error;
+    }
+  }
+
+  createSaal = async (kinoId, saal) => {
+    try {
+      const response = await axios.post(`${this.BASE_URL}/Kino/${kinoId}/saal`, saal);
+      if(response && response.data){
+        return response.data;
+      }
+      return [];
+    } catch (error) {
+      console.error('Failed to create saal', error);
+      throw error;
+    }
+  }
+
+  updateSaal = async (saal) => {
+    try {
+      const response = await axios.put(`${this.BASE_URL}/Kino/saal/${saal.Saal.SaalId}`, saal);
+      if(response && response.data){
+        return response.data;
+      }
+      return [];
+    } catch (error) {
+      console.error('Failed to update saal', error);
+      throw error;
+    }
+  }
+
 
 }
 

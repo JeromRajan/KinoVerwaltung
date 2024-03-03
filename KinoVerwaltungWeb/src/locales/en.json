@@ -105,6 +105,13 @@
     "editMovie": "Edit Movie",
     "save": "Save",
     "create": "Create",
-    "infoWillNotImplementedInPrototype": "This feature will not be implemented in the prototype."
+    "infoWillNotImplementedInPrototype": "This feature will not be implemented in the prototype.",
+    "saalName": "Hall Name",
+    "seatNumber": "Number of Seats",
+    "seatPerRowNumber": "Number of Seats per Row",
+    "rowNumber": "Number of Rows",
+    "noSaal": "No cinema halls available in the selected cinema",
+    "addHallToCinema": "Add Hall to Cinema",
+    "editHall": "Edit Hall"
   }
 }

@@ -187,6 +187,54 @@ namespace KinoVerwaltungAPI.Repositories
 
             return kinoMitSaelenDto;
         }
+
+        public async Task<IEnumerable<SaalInfoDto>> GetSaeleInfo(int kinoId)
+        {
+            List<SaalInfoDto> saalInfos = new List<SaalInfoDto>();
+
+            var saele = await _context.Saele.Where(s => s.KinoId == kinoId).ToListAsync();
+
+           
+            //Reihen auslesen
+            foreach (var saal in saele)
+            {
+                int anzahlReihen = 0;
+                int anzahlSitze = 0;
+                int anzahlSitzplaetzeProReihe = 0;
+
+                var reihen = await _context.Reihen.Where(r => r.SaalId == saal.SaalId).ToListAsync();
+                
+                
+                //Sitze auslesen
+                foreach (var reihe in reihen)
+                {
+                    var sitze = await _context.Sitze.Where(s => s.ReiheId == reihe.ReiheId).ToListAsync();
+                    anzahlReihen++;
+
+                    //Sitze zählen
+                    foreach (var sitz in sitze)
+                    {
+                        anzahlSitze++;
+                    }
+
+                    //Sitze pro Reihe zählen
+                    anzahlSitzplaetzeProReihe = anzahlSitze / anzahlReihen;
+                }
+
+               //Saalinformationen in Liste speichern
+                saalInfos.Add(new SaalInfoDto
+                {
+                    SaalId = saal.SaalId,
+                    Name = saal.Name,
+                    Nummer = saal.Nummer,
+                    KinoId = saal.KinoId,
+                    AnzahlReihen = anzahlReihen,
+                    AnzahlSitzPlaetzeProReihe = anzahlSitzplaetzeProReihe,
+                    AnzahlSitzplaetze = anzahlSitze
+                });
+            }
+            return saalInfos;
+        }
         #endregion
 
     }

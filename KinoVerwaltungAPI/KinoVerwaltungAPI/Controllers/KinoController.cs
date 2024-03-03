@@ -99,6 +99,20 @@ namespace KinoVerwaltungAPI.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [HttpGet("{kinoId}/saeleinfo")]
+        public async Task<IActionResult> GetSaeleInfo(int kinoId)
+        {
+            try
+            {
+                var saeleInfo = await _kinoRepository.GetSaeleInfo(kinoId);
+                return Ok(saeleInfo);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
         #endregion
     }
 

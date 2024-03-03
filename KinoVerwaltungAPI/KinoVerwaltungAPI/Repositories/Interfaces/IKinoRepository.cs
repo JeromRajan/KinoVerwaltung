@@ -23,6 +23,8 @@ namespace KinoVerwaltungAPI.Repositories.Interfaces
 
         Task UpdateSaalMitReihenUndSitzenAsync(int saalId, SaalDto saalDto);
         Task<KinoMitSaelenDto> GetKinoMitSaelenAsync(int kinoId);
+
+        Task<IEnumerable<SaalInfoDto>> GetSaeleInfo(int kinoId);
         #endregion
     }
 }
