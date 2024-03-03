@@ -26,8 +26,8 @@ namespace KinoVerwaltungAPI.Controllers
             return CreatedAtAction(nameof(AddMitgliederkarte), new { id = neueMitgliederkarte.MitgliederkarteId }, neueMitgliederkarte);
         }
 
-        [HttpPost("{identifikationsNummer}/aufladen")]
-        public async Task<IActionResult> Aufladen(string identifikationsNummer, [FromBody] decimal betrag)
+        [HttpPost("{identifikationsNummer}/aufladen/{betrag}")]
+        public async Task<IActionResult> Aufladen(string identifikationsNummer, decimal betrag)
         {
             try
             {

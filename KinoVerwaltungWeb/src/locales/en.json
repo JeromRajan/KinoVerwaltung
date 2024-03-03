@@ -10,7 +10,8 @@
     "french": "French",
     "memberarea": "Memberarea",
     "statistics": "Statistics",
-    "administation": "Administation"
+    "administation": "Administation",
+    "employeearea": "Employeearea"
   },
   "Movies": {
     "title": "Movies",
@@ -66,5 +67,17 @@
     "phone": "Phone",
     "streetNumber": "Street Number",
     "fieldRequired": "This field is required."
+  },
+  "EmployeeArea": {
+    "title": "Employee Area",
+    "membercard": "Membercard",
+    "generateMembercard": "Generate Membercard",
+    "generateMembercardInfo": "Generate a new membercard for a customer.",
+    "generate": "Generate",
+    "membercardBalance": "Membercard Balance",
+    "addBalance": "Add Balance",
+    "identifycationNumber": "Identification Number",
+    "enterBalance": "Enter the amount of balance",
+    "successfullyAddedBalance": "Successfully added balance to the membercard."
   }
 }

@@ -6,6 +6,7 @@ import AdministrationView from '@/views/AdministrationView.vue'
 import DetailMovieView from '@/components/kino/detailMovieView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
+import EmployeeAreaView from '@/views/EmployeeAreaView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,8 +45,12 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: RegisterView
+    },
+    {
+      path: '/employeearea',
+      name: 'employeearea',
+      component: EmployeeAreaView
     }
-
   ]
 })
 

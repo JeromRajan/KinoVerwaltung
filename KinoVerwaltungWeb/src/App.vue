@@ -20,6 +20,10 @@
           <v-icon icon="mdi-cogs" class="mr-2"/>
           {{ $t('Navigation.administation') }}
         </v-btn>
+        <v-btn text to="/employeearea" class="ml-5">
+          <v-icon icon="mdi-account-hard-hat" class="mr-2"/>
+          {{ $t('Navigation.employeearea') }}
+        </v-btn>
       </v-toolbar-title>
       <div v-if="!useUserStore.user" >
         <v-btn text to="/login"><v-icon icon="mdi-login" class="mr-2"/> {{$t('Navigation.login')}}</v-btn>
