@@ -5,9 +5,15 @@ export default {
 </script>
 
 <template>
-<div>
-  Add Cinema
-</div>
+  <div>
+    <v-alert
+      type="warning"
+      elevation="2"
+      variant="tonal"
+      >
+      {{ $t('Administration.infoWillNotImplementedInPrototype')}}
+    </v-alert>
+  </div>
 </template>
 
 <style scoped>

@@ -6,6 +6,7 @@
       class="mt-4 ml-10"
       dense
       outlined
+      variant="tonal"
       type="info">
       {{$t('Movies.noHallInfo')}}
     </v-alert>

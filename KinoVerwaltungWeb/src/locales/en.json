@@ -81,6 +81,30 @@
     "successfullyAddedBalance": "Successfully added balance to the membercard."
   },
   "Administration": {
-    "title": "Administration"
+    "title": "Administration",
+    "cinemaOverview": "Cinema Management",
+    "cinema": "Cinema",
+    "movieOverview": "Movie Management",
+    "movie": "Movie",
+    "hallOverview": "Hall Management",
+    "hall": "Hall",
+    "addCinema": "Add Cinema",
+    "addMovie": "Add Movie",
+    "addHall": "Add Hall",
+    "showsOverview": "Shows Management",
+    "show": "Show",
+    "duration": "Duration",
+    "description": "Description",
+    "ageRating": "Age Rating",
+    "language": "Language",
+    "genre": "Genre",
+    "actions": "Actions",
+    "price": "Price",
+    "tableTitle": "Title",
+    "cancel": "Cancel",
+    "editMovie": "Edit Movie",
+    "save": "Save",
+    "create": "Create",
+    "infoWillNotImplementedInPrototype": "This feature will not be implemented in the prototype."
   }
 }

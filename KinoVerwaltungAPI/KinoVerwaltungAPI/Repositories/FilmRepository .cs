@@ -30,7 +30,9 @@ namespace KinoVerwaltungAPI.Repositories
                 Beschreibung = film.Beschreibung,
                 Altersfreigabe = film.Altersfreigabe,
                 GenreName = film.Genre.Name,
-                SpracheName = film.Sprache.Name
+                GenreId = film.GenreId,
+                SpracheName = film.Sprache.Name,
+                SpracheId = film.SpracheId
             }).ToListAsync();
         }
 

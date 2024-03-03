@@ -22,6 +22,7 @@
         class="mt-4"
         dense
         outlined
+        variant="tonal"
         type="info">
         {{ $t('Movies.noMovies') }}
       </v-alert>
