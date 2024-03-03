@@ -79,5 +79,8 @@
     "identifycationNumber": "Identification Number",
     "enterBalance": "Enter the amount of balance",
     "successfullyAddedBalance": "Successfully added balance to the membercard."
+  },
+  "Administration": {
+    "title": "Administration"
   }
 }
