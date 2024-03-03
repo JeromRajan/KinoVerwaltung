@@ -1,10 +1,8 @@
 <template>
 <div>
   <h2 class="text-h4 font-weight-black text-blue-darken-2 mt-5">{{ $t('EmployeeArea.title') }}</h2>
-  <div class="flex flex-wrap mt-5">
+  <div class="mt-5" style="display: flex">
     <generateMembercard></generateMembercard>
-  </div>
-  <div class="flex flex-wrap mt-5">
     <loadMembercard></loadMembercard>
   </div>
 </div>
