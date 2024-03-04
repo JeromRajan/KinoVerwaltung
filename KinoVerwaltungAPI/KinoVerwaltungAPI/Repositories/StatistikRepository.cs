@@ -71,6 +71,63 @@ namespace KinoVerwaltungAPI.Repositories
             return belegung;
         }
 
+        //GetBelegungStatistikForKinosAsync
+        public async Task<IEnumerable<BelegungDto>> GetBelegungStatistikForKinosAsync()
+        {
+            //Alle Kinos holen
+            var kinos = await _context.Kinos
+                .ToListAsync();
+            if (kinos == null)
+            {
+                return null; 
+            }
+
+            //Liste für BelegungDtos erstellen
+            var belegungen = new List<BelegungDto>();
+
+            //Für jedes Kino BelegungDto erstellen
+            foreach (var kino in kinos)
+            {
+                //All vorführungen des Kinos holen
+                var vorführungen = await _context.Vorführungen
+                    .Where(v => v.Saal.KinoId == kino.KinoId)
+                    .ToListAsync();
+                if (vorführungen == null)
+                {
+                    return null;
+                }
+
+                //Anzahl der Tickets von allen Vorführungen zählen
+                var anzahlTickets = 0;
+                foreach (var vorführung in vorführungen)
+                {
+                    //Tickets von Vorführung holen
+                    var tickets = await _context.Tickets
+                        .Where(t => t.VorführungId == vorführung.VorführungId)
+                        .ToListAsync();
+
+                    foreach (var ticket in tickets)
+                    {
+                        anzahlTickets++;
+                    }
+                }
+
+                //BelegungDto erstellen
+                var belegung = new BelegungDto
+                {
+                    Id = kino.KinoId,
+                    AnzahlBesucher = anzahlTickets,
+                    Name = kino.Name,
+                    Datum = DateTime.Now,
+                    Type = "Kino"
+                };
+
+                belegungen.Add(belegung);
+            }
+
+            return belegungen;
+        }
+
 
         public async Task<BelegungDto> GetBelegungStatistikBySaalIdAsync(int saalId)
         {
@@ -121,17 +178,65 @@ namespace KinoVerwaltungAPI.Repositories
             return belegung;
         }
 
-        Task<IEnumerable<BelegungDto>> IStatistikRepository.GetBelegungStatistikByFilmIdAsync(int filmId)
+        public async Task<IEnumerable<BelegungDto>> GetBelegungStatistikForSaalsAsync(int kinoId)
         {
-            throw new NotImplementedException();
+           //Alle Säle des Kinos holen
+           var saele = await _context.Saele
+                .Where(s => s.KinoId == kinoId)
+                .ToListAsync();
+
+            if (saele == null)
+            {
+                return null;
+            }
+
+            //Liste für BelegungDtos erstellen
+            var belegungen = new List<BelegungDto>();
+
+            //Für jeden Saal BelegungDto erstellen
+            foreach (var saal in saele)
+            {
+                //All vorführungen des Saals holen
+                var vorführungen = await _context.Vorführungen
+                    .Where(v => v.SaalId == saal.SaalId)
+                    .ToListAsync();
+                if (vorführungen == null)
+                {
+                    return null;
+                }
+
+                //Anzahl der Tickets von allen Vorführungen zählen
+                var anzahlTickets = 0;
+                foreach (var vorführung in vorführungen)
+                {
+                    //Tickets von Vorführung holen
+                    var tickets = await _context.Tickets
+                        .Where(t => t.VorführungId == vorführung.VorführungId)
+                        .ToListAsync();
+
+                    foreach (var ticket in tickets)
+                    {
+                        anzahlTickets++;
+                    }
+                }
+
+                //BelegungDto erstellen
+                var belegung = new BelegungDto
+                {
+                    Id = saal.SaalId,
+                    AnzahlBesucher = anzahlTickets,
+                    Name = saal.Name,
+                    Datum = DateTime.Now,
+                    Type = "Saal"
+                };
+
+                belegungen.Add(belegung);
+            }
+
+            return belegungen;
         }
 
-        
 
-        Task<IEnumerable<BelegungDto>> IStatistikRepository.GetBelegungStatistikByVorführungIdAsync(int vorführungId)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
 
         //Umsatz Statistik Methoden
@@ -319,9 +424,176 @@ namespace KinoVerwaltungAPI.Repositories
             return umsatzDto;
         }
 
-        Task<IEnumerable<UmsatzDto>> IStatistikRepository.GetUmsatzStatistikByVorführungIdAsync(int vorführungId)
+        //GetUmsatzStatistikForFilmsAsync
+        public async Task<IEnumerable<UmsatzDto>> GetUmsatzStatistikForFilmsAsync()
         {
-            throw new NotImplementedException();
+            //Alle Filme holen
+            var filme = await _context.Filme
+                .ToListAsync();
+            if (filme == null)
+            {
+                return null;
+            }
+
+            //Liste für UmsatzDtos erstellen
+            var umsätze = new List<UmsatzDto>();
+
+            //Für jeden Film UmsatzDto erstellen
+            foreach (var film in filme)
+            {
+                //All vorführungen des Films holen
+                var vorführungen = await _context.Vorführungen
+                    .Where(v => v.FilmId == film.FilmId)
+                    .ToListAsync();
+                if (vorführungen == null)
+                {
+                    return null;
+                }
+
+                //Umsatz von allen Vorführungen zählen
+                decimal umsatz = 0;
+                foreach (var vorführung in vorführungen)
+                {
+                    //Tickets von Vorführung holen
+                    var tickets = await _context.Tickets
+                        .Where(t => t.VorführungId == vorführung.VorführungId)
+                        .ToListAsync();
+
+                    foreach (var ticket in tickets)
+                    {
+                        umsatz += ticket.Preis;
+                    }
+                }
+
+                //UmsatzDto erstellen
+                var umsatzDto = new UmsatzDto
+                {
+                    Id = film.FilmId,
+                    Umsatz = umsatz,
+                    Name = film.Titel,
+                    Datum = DateTime.Now,
+                    Type = "Film"
+                };
+
+                umsätze.Add(umsatzDto);
+            }
+
+            return umsätze;
+        }
+
+        //GetUmsatzStatistikForKinosAsync
+        public async Task<IEnumerable<UmsatzDto>> GetUmsatzStatistikForKinosAsync()
+        {
+            //Alle Kinos holen
+            var kinos = await _context.Kinos
+                .ToListAsync();
+            if (kinos == null)
+            {
+                return null;
+            }
+
+            //Liste für UmsatzDtos erstellen
+            var umsätze = new List<UmsatzDto>();
+
+            //Für jedes Kino UmsatzDto erstellen
+            foreach (var kino in kinos)
+            {
+                //All vorführungen des Kinos holen
+                var vorführungen = await _context.Vorführungen
+                    .Where(v => v.Saal.KinoId == kino.KinoId)
+                    .ToListAsync();
+                if (vorführungen == null)
+                {
+                    return null;
+                }
+
+                //Umsatz von allen Vorführungen zählen
+                decimal umsatz = 0;
+                foreach (var vorführung in vorführungen)
+                {
+                    //Tickets von Vorführung holen
+                    var tickets = await _context.Tickets
+                        .Where(t => t.VorführungId == vorführung.VorführungId)
+                        .ToListAsync();
+
+                    foreach (var ticket in tickets)
+                    {
+                        umsatz += ticket.Preis;
+                    }
+                }
+
+                //UmsatzDto erstellen
+                var umsatzDto = new UmsatzDto
+                {
+                    Id = kino.KinoId,
+                    Umsatz = umsatz,
+                    Name = kino.Name,
+                    Datum = DateTime.Now,
+                    Type = "Kino"
+                };
+
+                umsätze.Add(umsatzDto);
+            }
+
+            return umsätze;
+        }
+        
+        //GetUmsatzStatistikForSaalsAsync
+        public async Task<IEnumerable<UmsatzDto>> GetUmsatzStatistikForSaalsAsync(int kinoId)
+        {
+            //Alle Säle des Kinos holen
+            var saele = await _context.Saele
+                .Where(s => s.KinoId == kinoId)
+                .ToListAsync();
+            if (saele == null)
+            {
+                return null;
+            }
+
+            //Liste für UmsatzDtos erstellen
+            var umsätze = new List<UmsatzDto>();
+
+            //Für jeden Saal UmsatzDto erstellen
+            foreach (var saal in saele)
+            {
+                //All vorführungen des Saals holen
+                var vorführungen = await _context.Vorführungen
+                    .Where(v => v.SaalId == saal.SaalId)
+                    .ToListAsync();
+                if (vorführungen == null)
+                {
+                    return null;
+                }
+
+                //Umsatz von allen Vorführungen zählen
+                decimal umsatz = 0;
+                foreach (var vorführung in vorführungen)
+                {
+                    //Tickets von Vorführung holen
+                    var tickets = await _context.Tickets
+                        .Where(t => t.VorführungId == vorführung.VorführungId)
+                        .ToListAsync();
+
+                    foreach (var ticket in tickets)
+                    {
+                        umsatz += ticket.Preis;
+                    }
+                }
+
+                //UmsatzDto erstellen
+                var umsatzDto = new UmsatzDto
+                {
+                    Id = saal.SaalId,
+                    Umsatz = umsatz,
+                    Name = saal.Name,
+                    Datum = DateTime.Now,
+                    Type = "Saal"
+                };
+
+                umsätze.Add(umsatzDto);
+            }
+
+            return umsätze;
         }
 
         #endregion

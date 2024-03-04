@@ -170,5 +170,22 @@
     "ticketStatus": "Ticket Status",
     "byCashmethodCanOnlyBeUsedInCinema": "The payment method 'By Cash' can only be used in the cinema.",
     "ticketBuySuccessInfo": "You have successfully bought a ticket."
+  },
+  "Statistics": {
+    "title": "Statistics",
+    "hallOccupancy": "Hall Occupancy",
+    "cinemaOccupancy": "Cinema Occupancy",
+    "numberOfVisitors": "Number of Visitors",
+    "cinemaSales": "Cinema Sales",
+    "salesVolume": "Sales Volume in CHF",
+    "hallSales": "Hall Sales",
+    "movieSales": "Movie Sales",
+    "movie": "Movie",
+    "userSales": "User Sales",
+    "user": "User",
+    "movieStatistics": "Movie Statistics",
+    "hallStatistics": "Hall Statistics",
+    "cinemaStatistics": "Cinema Statistics",
+    "userStatistics": "User Statistics"
   }
 }

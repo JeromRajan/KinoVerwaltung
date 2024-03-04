@@ -24,10 +24,25 @@ namespace KinoVerwaltungAPI.Controllers
             return Ok(belegungStatistik);
         }
 
+        [HttpGet("belegung/kinos")]
+        public async Task<IActionResult> GetBelegungStatistikForKinos()
+        {
+            var belegungStatistik = await _statistikRepository.GetBelegungStatistikForKinosAsync();
+            return Ok(belegungStatistik);
+        }
+
+
         [HttpGet("belegung/saal/{saalId}")]
         public async Task<IActionResult> GetBelegungStatistikBySaalId(int saalId)
         {
             var belegungStatistik = await _statistikRepository.GetBelegungStatistikBySaalIdAsync(saalId);
+            return Ok(belegungStatistik);
+        }
+
+        [HttpGet("belegung/saals/{kinoId}")]
+        public async Task<IActionResult> GetBelegungStatistikForSaals(int kinoId)
+        {
+            var belegungStatistik = await _statistikRepository.GetBelegungStatistikForSaalsAsync(kinoId);
             return Ok(belegungStatistik);
         }
 
@@ -61,6 +76,27 @@ namespace KinoVerwaltungAPI.Controllers
         public async Task<IActionResult> GetUmsatzStatistikByFilmId(int filmId)
         {
             var umsatzStatistik = await _statistikRepository.GetUmsatzStatistikByFilmIdAsync(filmId);
+            return Ok(umsatzStatistik);
+        }
+
+        [HttpGet("umsatz/films")]
+        public async Task<IActionResult> GetUmsatzStatistikForFilms()
+        {
+            var umsatzStatistik = await _statistikRepository.GetUmsatzStatistikForFilmsAsync();
+            return Ok(umsatzStatistik);
+        }
+
+        [HttpGet("umsatz/kinos")]
+        public async Task<IActionResult> GetUmsatzStatistikForKinos()
+        {
+            var umsatzStatistik = await _statistikRepository.GetUmsatzStatistikForKinosAsync();
+            return Ok(umsatzStatistik);
+        }
+
+        [HttpGet("umsatz/saals/{kinoId}")]
+        public async Task<IActionResult> GetUmsatzStatistikForSaals(int kinoId)
+        {
+            var umsatzStatistik = await _statistikRepository.GetUmsatzStatistikForSaalsAsync(kinoId);
             return Ok(umsatzStatistik);
         }
 

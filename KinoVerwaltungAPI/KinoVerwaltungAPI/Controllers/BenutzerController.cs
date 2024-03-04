@@ -119,6 +119,14 @@ namespace KinoVerwaltungAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetBenutzer()
+        {
+            var benutzer = await _benutzerRepository.GetBenutzerAsync();
+            return Ok(benutzer);
+        }
+
         #endregion
 
         //Rollen-Endpunkte

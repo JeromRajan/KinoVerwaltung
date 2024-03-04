@@ -8,7 +8,7 @@
       timeout="5000"
     >
       <v-icon left>mdi-check</v-icon>
-      {{ $t('Movies.ticketBuySuccessInfo') }}
+      {{ $t('MemberArea.ticketBuySuccessInfo') }}
       <template v-slot:actions>
         <v-btn
           variant="text"
@@ -100,7 +100,7 @@ export default {
         { title: this.$t('MemberArea.seatRow'), value: 'sitzReihe' },
         { title: this.$t('MemberArea.seatNumber'), value: 'sitzNummer' },
         { title: this.$t('MemberArea.price'), value: 'preis' },
-        { title: this.$t('MemberArea.ticketStatus'), value: 'ticketStatus' },
+        { title: this.$t('MemberArea.ticketStatus'), value: 'ticketStatus', sortable: false },
         { title: this.$t('MemberArea.actions'), value: 'actions', sortable: false }
       ],
       userStore: useUserStore(),

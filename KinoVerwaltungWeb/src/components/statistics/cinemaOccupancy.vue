@@ -1,15 +1,68 @@
-<script>
-export default {
-  name: 'cinemaOccupancy'
-}
-</script>
-
 <template>
-<div>
-  <h1>Cinema Occupancy</h1>
-</div>
+
+  <div v-if="chartData && chartData.labels && chartData.labels.length">
+    <v-card
+      :max-width="200 * chartData.labels.length "
+      class=" pa-5 pb-8 "
+      elevation="8"
+      rounded="lg"
+      min-width="300"
+      width="100%"
+    >
+      <h1>{{ $t('Statistics.cinemaOccupancy') }}</h1>
+      <div class="mt-5">
+        <Bar :data="chartData" :options="chartOptions" />
+      </div>
+    </v-card>
+  </div>
 </template>
 
-<style scoped>
+<script>
+import { Bar } from 'vue-chartjs'
+import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js'
+import StatistikService from '@/services/statistikService.js'
 
-</style>
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+
+export default {
+  components: {
+    Bar
+  },
+  data() {
+    return {
+      statisikService: StatistikService.getInstance(),
+      chartData: {
+        labels: [], // Namen der Kinos
+        datasets: [
+          {
+            label: this.$t('Statistics.numberOfVisitors'),
+            backgroundColor: '#0583F2',
+            data: [] // Anzahl der Besucher
+          }
+        ]
+      },
+      chartOptions: {
+        responsive: true
+      }
+    }
+  },
+  created() {
+    this.loadCinemaOccupancy()
+  },
+  methods: {
+    // Daten für das Diagramm laden
+    async loadCinemaOccupancy() {
+      const daten = await this.statisikService.getCinemaOccupancy()
+      if (daten) {
+        this.chartData.labels = []
+        this.chartData.datasets[0].data = []
+        daten.forEach(element => {
+          this.chartData.labels.push(element.name)
+          this.chartData.datasets[0].data.push(element.anzahlBesucher)
+        })
+      }
+
+    }
+  }
+}
+</script>

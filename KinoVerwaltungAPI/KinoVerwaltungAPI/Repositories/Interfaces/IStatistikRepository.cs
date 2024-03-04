@@ -7,21 +7,26 @@ namespace KinoVerwaltungAPI.Repositories.Interfaces
    
         Task<BelegungDto> GetBelegungStatistikByKinoIdAsync(int kinoId);
 
+        Task<IEnumerable<BelegungDto>> GetBelegungStatistikForKinosAsync();
+
         Task<BelegungDto> GetBelegungStatistikBySaalIdAsync(int saalId);
 
-        Task<IEnumerable<BelegungDto>> GetBelegungStatistikByVorführungIdAsync(int vorführungId);
-
-        Task<IEnumerable<BelegungDto>> GetBelegungStatistikByFilmIdAsync(int filmId);
+        Task<IEnumerable<BelegungDto>> GetBelegungStatistikForSaalsAsync(int kinoId);
 
         Task<UmsatzDto> GetUmsatzStatistikByKinoIdAsync(int kinoId);
 
+        Task<IEnumerable<UmsatzDto>> GetUmsatzStatistikForKinosAsync();
+
         Task<UmsatzDto> GetUmsatzStatistikBySaalIdAsync(int saalId);
+
+        Task<IEnumerable<UmsatzDto>> GetUmsatzStatistikForSaalsAsync(int kinoId);
 
         Task<UmsatzDto> GetUmsatzStatistikByBenutzerIdAsync(int benutzerId);
 
         Task<UmsatzDto> GetUmsatzStatistikByFilmIdAsync(int filmId);
 
-        Task<IEnumerable<UmsatzDto>> GetUmsatzStatistikByVorführungIdAsync(int vorführungId);       
+        Task<IEnumerable<UmsatzDto>> GetUmsatzStatistikForFilmsAsync();
+
 
     }
 }

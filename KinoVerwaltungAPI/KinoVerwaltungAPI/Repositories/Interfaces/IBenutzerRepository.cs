@@ -10,5 +10,6 @@ namespace KinoVerwaltungAPI.Repositories.Interfaces
         Task<Benutzer> LoginAsync(string email, string passwort);
         Task<Benutzer> GetBenutzerDatenAsync(int benutzerId);
         Task UpdateBenutzerAsync(Benutzer benutzer, AdresseDto adresseDto);
+        Task<IEnumerable<Benutzer>> GetBenutzerAsync();
     }
 }

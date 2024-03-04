@@ -51,6 +51,19 @@ class UserService{
         throw error;
       }
     }
+
+    getUsers = async () => {
+      try {
+        const response = await axios.get(`${this.BASE_URL}/Benutzer`);
+        if(response && response.data){
+          return response.data.$values || [];
+        }
+        return [];
+      } catch (error) {
+        console.error('Failed to fetch users', error);
+        throw error;
+      }
+    }
 }
 
 export default UserService;

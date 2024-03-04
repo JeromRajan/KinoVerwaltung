@@ -161,6 +161,12 @@ namespace KinoVerwaltungAPI.Repositories
             _context.Benutzer.Update(benutzer);
             await _context.SaveChangesAsync();
         }
+
+        public async  Task<IEnumerable<Benutzer>> GetBenutzerAsync()
+        {
+            return await _context.Benutzer.Where(b => b.RolleId == 3).ToListAsync();
+        }
+
         #endregion
 
         // Implementierung der Methode für Rollen
