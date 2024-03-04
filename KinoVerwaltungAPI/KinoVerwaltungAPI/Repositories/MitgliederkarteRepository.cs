@@ -46,6 +46,15 @@ namespace KinoVerwaltungAPI.Repositories
             mitgliederkarte.VerfügbareBetrag += betrag;
             await _context.SaveChangesAsync();
         }
+
+        //Mitglieder Betrag abfragen
+        public async Task<Decimal> GetMitgliederBetragByBenutzerIdAsync(int benutzerId)
+        {
+            var mitgliederkarte = await _context.Mitgliederkarten
+                .FirstOrDefaultAsync(m => m.BenutzerId == benutzerId);
+
+            return mitgliederkarte.VerfügbareBetrag;
+        }
         #endregion
 
         //Implementierung Mitgliederstatus Methoden

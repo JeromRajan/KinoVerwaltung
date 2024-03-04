@@ -16,7 +16,6 @@
       </v-chip-group>
     </div>
 
-
     <div v-if="movies.length < 1">
       <v-alert
         class="mt-4"
@@ -95,8 +94,8 @@ export default defineComponent({
       { title: this.$t('Movies.ageRestriction'), key: 'ageRestriction' },
       { title: this.$t('Movies.genre'), key: 'genre' },
       { title: this.$t('Movies.language'), key: 'language' },
-      {title: this.$t('Movies.availablity'), key: 'availablity'},
-      { title: this.$t('Movies.actions'), key: 'detail'}
+      {title: this.$t('Movies.availablity'), key: 'availablity', sortable: false},
+      { title: this.$t('Movies.actions'), key: 'detail' , sortable: false}
     ]
   },
   watch: {

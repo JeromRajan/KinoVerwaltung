@@ -29,14 +29,25 @@ class UserService{
     register = async (user) => {
       try {
         const response = await axios.post(`${this.BASE_URL}/Benutzer/registrieren`, user);
-        console.log("register response");
-        console.log(response);
         if(response && response.data){
           return response.data;
         }
         return [];
       } catch (error) {
         console.error('Failed to register user', error);
+        throw error;
+      }
+    }
+
+    getMembercardBalance = async (userId) => {
+      try {
+        const response = await axios.get(`${this.BASE_URL}/Mitgliederkarten/${userId}/betrag`);
+        if(response && response.data){
+          return response.data;
+        }
+        return null;
+      } catch (error) {
+        console.error('Failed to fetch membercard balance', error);
         throw error;
       }
     }

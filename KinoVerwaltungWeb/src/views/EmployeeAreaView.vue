@@ -8,8 +8,6 @@
   <div class="mt-10" style="display: flex">
     <confirmTicket></confirmTicket>
     <buyTicketWithCash></buyTicketWithCash>
-  </div>
-  <div class="mt-10" style="display: flex">
     <buyTicketWithMembercard></buyTicketWithMembercard>
   </div>
 </div>

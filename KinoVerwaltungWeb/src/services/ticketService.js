@@ -26,11 +26,11 @@ class TicketService {
     }
   }
 
-  getTicket = async (ticketId) => {
+  getTicketByUserId = async (userId) => {
     try {
-      const response = await axios.get(`${this.BASE_URL}/ticket/${ticketId}`);
-      if(response && response.data){
-        return response.data;
+      const response = await axios.get(`${this.BASE_URL}/ticket/${userId}`);
+      if(response && response.data && response.data.$values){
+        return response.data.$values;
       }
       return null;
     } catch (error) {

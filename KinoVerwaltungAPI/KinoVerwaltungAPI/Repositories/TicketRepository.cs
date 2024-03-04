@@ -157,7 +157,9 @@ namespace KinoVerwaltungAPI.Repositories
                     Zahlungsmethode = zahlungsmethode.Name,
                     Kinoname = kino.Name,
                     SitzReihe = sitzReihe.Nummer,
-                    ReferenzNummer = ticket.ReferenzNummer
+                    ReferenzNummer = ticket.ReferenzNummer,
+                    TicketStatus = ticket.Status,
+                    Preis = ticket.Preis
                 };
                 ticketByUserDtos.Add(ticketByUserDto);
             }

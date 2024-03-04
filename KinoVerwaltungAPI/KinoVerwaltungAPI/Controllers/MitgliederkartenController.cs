@@ -40,6 +40,13 @@ namespace KinoVerwaltungAPI.Controllers
             }
         }
 
+        [HttpGet("{benutzerId}/betrag")]
+        public async Task<ActionResult<Decimal>> GetMitgliederBetragByBenutzerId(int benutzerId)
+        {
+            var betrag = await _mitgliederkarteRepository.GetMitgliederBetragByBenutzerIdAsync(benutzerId);
+            return Ok(betrag);
+        }
+
         #endregion
 
         //Mitgliederstatus-Endpunkte

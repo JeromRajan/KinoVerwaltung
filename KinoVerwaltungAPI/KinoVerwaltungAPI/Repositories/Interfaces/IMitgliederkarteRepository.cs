@@ -8,5 +8,7 @@ namespace KinoVerwaltungAPI.Repositories.Interfaces
         Task AufladenAsync(string identifikationsNummer, decimal betrag);
 
         Task<Mitgliederstatus> AddMitgliederstatus(Mitgliederstatus mitgliederstatus);
+
+        Task<Decimal> GetMitgliederBetragByBenutzerIdAsync(int benutzerId);
     }
 }

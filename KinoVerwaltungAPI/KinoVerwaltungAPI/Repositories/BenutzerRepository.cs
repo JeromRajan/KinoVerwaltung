@@ -98,6 +98,8 @@ namespace KinoVerwaltungAPI.Repositories
             var benutzer = await _context.Benutzer
                 .Include(u => u.Adresse)
                 .Include(u => u.Rolle)
+                .Include(u => u.Mitgliederkarte)
+                .Include(u => u.Mitgliederkarte.Mitgliederstatus)
                 .FirstOrDefaultAsync(u => u.Email == email);
 
             if (benutzer != null)

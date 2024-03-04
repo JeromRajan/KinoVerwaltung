@@ -24,5 +24,9 @@ namespace KinoVerwaltungAPI.Dtos
 
         public string ReferenzNummer { get; set; }
 
+        public decimal Preis { get; set; }
+
+        public string TicketStatus { get; set; }
+
     }
 }

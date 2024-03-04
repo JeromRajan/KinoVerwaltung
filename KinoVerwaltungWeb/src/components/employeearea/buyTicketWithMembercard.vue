@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class=" pa-5 pb-8"
+    class=" pa-5 pb-8 ml-15"
     elevation="8"
     max-width="600"
     rounded="lg"

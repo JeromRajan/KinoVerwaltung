@@ -44,9 +44,7 @@ export const useKinoStore = defineStore('kino', {
       this.fetchHall(kino.kinoId)
     },
     setCurrentMovie(movie) {
-      console.log(movie)
       this.currentMovie = movie
-
     }
   },
   getters: {
