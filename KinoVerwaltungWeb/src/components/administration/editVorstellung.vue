@@ -121,7 +121,7 @@ export default {
   created() {
     this.getMovies()
     if (this.showEdit.datum) {
-      this.showEdit.datum = new Date(this.showEdit.datum).toISOString().split('T')[0]
+      this.showEdit.datum = this.showEdit.datum.split('T')[0]
     }
     if (this.showEdit.startZeit) {
       this.showEdit.startZeit = new Date(this.showEdit.startZeit).toLocaleTimeString()

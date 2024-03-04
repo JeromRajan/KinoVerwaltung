@@ -18,6 +18,7 @@
             v-if="error"
             v-model="error"
             closable
+            class="mb-4"
             dismissible
             type="error"
             variant="tonal">
@@ -151,7 +152,11 @@ export default {
         this.$emit('show-added')
         this.isLoading = false
       }).catch(error => {
-        this.error = error
+        if(error.response.data) {
+          this.error = error.response.data
+        } else {
+          this.error = error
+        }
         this.isLoading = false
       })
     },
@@ -160,7 +165,11 @@ export default {
       this.error = ''
       this.adminService.getMovies().then(response => {
         if (response && response.error) {
-          this.error = response.error
+          if(response.error.response.data.error) {
+            this.error = response.error.response.data.error
+          } else {
+            this.error = response.error
+          }
         } else {
           this.movies = response.$values
         }
