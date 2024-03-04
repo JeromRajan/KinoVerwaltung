@@ -4,7 +4,7 @@
   <v-sheet
     class="px-4 mt-4 "
     elevation="4"
-    height="450"
+    min-height="100%"
     rounded
     width="100%"
   >
@@ -49,14 +49,17 @@
       :search="search"
       >
         <template v-slot:item.detail="{ item }">
-          <v-btn
-            color="primary"
-            @click="setMovie(item)"
-          >
-            {{ $t('Movies.seeDetails') }}
-          </v-btn>
+          <detail-movie-view :vorführung-id="item.detail" @resevation-done="loadMovie(-1)" />
         </template>
 
+        <template v-slot:item.availablity="{ item }">
+          <v-chip
+            :color="item.availablity > 0 ? 'success' : 'error'"
+            dark
+          >
+            {{ item.availablity > 0 ? $t('Movies.available') : $t('Movies.notAvailable') }}
+          </v-chip>
+        </template>
       </v-data-table>
     </v-card>
   </v-sheet>
@@ -65,9 +68,13 @@
 <script>
 import { defineComponent } from 'vue'
 import { useKinoStore } from '@/stores/kinoStore.js'
+import detailMovieView from '@/components/kino/detailMovieView.vue'
 
 export default defineComponent({
   name: 'filmOverview',
+  components: {
+    detailMovieView
+  },
   data: () => {
     return {
       useKinoStore: useKinoStore(),
@@ -88,7 +95,8 @@ export default defineComponent({
       { title: this.$t('Movies.ageRestriction'), key: 'ageRestriction' },
       { title: this.$t('Movies.genre'), key: 'genre' },
       { title: this.$t('Movies.language'), key: 'language' },
-      { title: this.$t('Movies.detailView'), key: 'detail'}
+      {title: this.$t('Movies.availablity'), key: 'availablity'},
+      { title: this.$t('Movies.actions'), key: 'detail'}
     ]
   },
   watch: {
@@ -125,7 +133,8 @@ export default defineComponent({
           ageRestriction: movie.filmFSK,
           genre: movie.filmGenre,
           language: movie.filmSprache,
-          detail: movie.vorführungId
+          availablity: movie.anzahlFreieSitzplaetze,
+          detail: movie.vorführungId,
         })
       })
     },

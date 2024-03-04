@@ -36,7 +36,19 @@
     "language": "Language",
     "minutes": "Minutes",
     "genre": "Genre",
-    "seeDetails": "See Details"
+    "seeDetails": "See Details",
+    "reserve": "Reserve",
+    "reserveMovie": "Reserve Movie",
+    "actions": "Actions",
+    "availablity": "Availablity",
+    "notAvailable": "Not Available",
+    "available": "Available",
+    "row": "Row",
+    "infoYouNeedToBeLoggedIn": "You need to be logged in to reserve a movie. Please login or register.",
+    "paymentMethod": "Payment Method",
+    "reservationSuccess": "Reservation successful.",
+    "close": "Close",
+    "book": "Book"
   },
   "Login": {
     "password": "Password",

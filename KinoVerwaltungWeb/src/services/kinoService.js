@@ -78,6 +78,19 @@ class KinoService {
       throw error;
     }
   }
+
+  getSitzplan = async (vorführungId) => {
+    try {
+      const response = await axios.get(`${this.BASE_URL}/Vorführung/${vorführungId}/sitze`);
+      if(response && response.data){
+        return response.data || [];
+      }
+      return [];
+    } catch (error) {
+      console.error('Failed to fetch sitzplan', error);
+      throw error;
+    }
+  }
 }
 
 export default KinoService;

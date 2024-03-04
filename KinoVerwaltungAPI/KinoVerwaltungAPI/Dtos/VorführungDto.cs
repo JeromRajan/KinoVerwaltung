@@ -23,5 +23,11 @@
 
         public string FilmSprache { get; set; }
 
+        public int AnzahlSitzplaetze { get; set; }
+
+        public int AnzahlReservierungen { get; set; }
+
+        public int AnzahlFreieSitzplaetze { get; set; }
+
     }
 }

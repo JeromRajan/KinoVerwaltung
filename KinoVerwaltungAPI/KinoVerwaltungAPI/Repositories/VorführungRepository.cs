@@ -118,6 +118,30 @@ namespace KinoVerwaltungAPI.Repositories
                 //Sprache holen
                 var sprache = await _context.Sprachen.FindAsync(film.SpracheId);
 
+                //Saal holen
+                var saal = await _context.Saele.FindAsync(vorführung.SaalId);
+
+                //Reihen holen
+                var reihen = await _context.Reihen.Where(r => r.SaalId == saal.SaalId).ToListAsync();
+
+                int anzahlSitzplaetze = 0;
+                int anzahlReservierungen = 0;
+                int anzahlFreieSitzplaetze = 0;
+
+                //Sitze holen
+                foreach (var reihe in reihen)
+                {
+                    var sitze = await _context.Sitze.Where(s => s.ReiheId == reihe.ReiheId).ToListAsync();
+                    anzahlSitzplaetze += sitze.Count;
+                }
+
+                //Reservierungen holen
+                var reservierungen = await _context.Tickets.Where(t => t.VorführungId == vorführung.VorführungId).ToListAsync();
+                anzahlReservierungen = reservierungen.Count;
+
+                //Freie Sitzplätze berechnen
+                anzahlFreieSitzplaetze = anzahlSitzplaetze - anzahlReservierungen;
+
                //VorführungDto hinzufügen
                var vorführungDto = new VorführungDto()
                {
@@ -132,7 +156,10 @@ namespace KinoVerwaltungAPI.Repositories
                     FilmGenre = genre.Name,
                     FilmDauer = film.Dauer,
                     FilmFSK = film.Altersfreigabe,
-                    FilmSprache = sprache.Name
+                    FilmSprache = sprache.Name,
+                    AnzahlSitzplaetze = anzahlSitzplaetze,
+                    AnzahlReservierungen = anzahlReservierungen,
+                    AnzahlFreieSitzplaetze = anzahlFreieSitzplaetze
                 };
                 vorführungenDto.Add(vorführungDto);
             }
@@ -192,6 +219,31 @@ namespace KinoVerwaltungAPI.Repositories
                 //Sprache holen
                 var sprache = await _context.Sprachen.FindAsync(film.SpracheId);
 
+
+                //Saal holen
+                var saal = await _context.Saele.FindAsync(vorführung.SaalId);
+
+                //Reihen holen
+                var reihen = await _context.Reihen.Where(r => r.SaalId == saal.SaalId).ToListAsync();
+
+                int anzahlSitzplaetze = 0;
+                int anzahlReservierungen = 0;
+                int anzahlFreieSitzplaetze = 0;
+
+                //Sitze holen
+                foreach (var reihe in reihen)
+                {
+                    var sitze = await _context.Sitze.Where(s => s.ReiheId == reihe.ReiheId).ToListAsync();
+                    anzahlSitzplaetze += sitze.Count;
+                }
+
+                //Reservierungen holen
+                var reservierungen = await _context.Tickets.Where(t => t.VorführungId == vorführung.VorführungId).ToListAsync();
+                anzahlReservierungen = reservierungen.Count;
+
+                //Freie Sitzplätze berechnen
+                anzahlFreieSitzplaetze = anzahlSitzplaetze - anzahlReservierungen;
+
                 //VorführungDto hinzufügen
                 var vorführungDto = new VorführungDto()
                 {
@@ -205,7 +257,10 @@ namespace KinoVerwaltungAPI.Repositories
                     FilmGenre = genre.Name,
                     FilmDauer = film.Dauer,
                     FilmFSK = film.Altersfreigabe,
-                    FilmSprache = sprache.Name
+                    FilmSprache = sprache.Name,
+                    AnzahlSitzplaetze = anzahlSitzplaetze,
+                    AnzahlReservierungen = anzahlReservierungen,
+                    AnzahlFreieSitzplaetze = anzahlFreieSitzplaetze
                 };
                 vorführungenDto.Add(vorführungDto);
             }
@@ -242,6 +297,30 @@ namespace KinoVerwaltungAPI.Repositories
                 //Sprache holen
                 var sprache = await _context.Sprachen.FindAsync(film.SpracheId);
 
+                //Saal holen
+                var saal = await _context.Saele.FindAsync(vorführung.SaalId);
+
+                //Reihen holen
+                var reihen = await _context.Reihen.Where(r => r.SaalId == saal.SaalId).ToListAsync();
+
+                int anzahlSitzplaetze = 0;
+                int anzahlReservierungen = 0;
+                int anzahlFreieSitzplaetze = 0;
+
+                //Sitze holen
+                foreach (var reihe in reihen)
+                {
+                    var sitze = await _context.Sitze.Where(s => s.ReiheId == reihe.ReiheId).ToListAsync();
+                    anzahlSitzplaetze += sitze.Count;
+                }
+
+                //Reservierungen holen
+                var reservierungen = await _context.Tickets.Where(t => t.VorführungId == vorführung.VorführungId).ToListAsync();
+                anzahlReservierungen = reservierungen.Count;
+
+                //Freie Sitzplätze berechnen
+                anzahlFreieSitzplaetze = anzahlSitzplaetze - anzahlReservierungen;
+
                 //VorführungDto hinzufügen
                 var vorführungDto = new VorführungDto()
                 {
@@ -255,7 +334,10 @@ namespace KinoVerwaltungAPI.Repositories
                     FilmGenre = genre.Name,
                     FilmDauer = film.Dauer,
                     FilmFSK = film.Altersfreigabe,
-                    FilmSprache = sprache.Name
+                    FilmSprache = sprache.Name,
+                    AnzahlSitzplaetze = anzahlSitzplaetze,
+                    AnzahlReservierungen = anzahlReservierungen,
+                    AnzahlFreieSitzplaetze = anzahlFreieSitzplaetze
                 };
                 vorführungenDto.Add(vorführungDto);
             }

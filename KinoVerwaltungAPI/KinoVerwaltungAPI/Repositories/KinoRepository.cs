@@ -31,7 +31,7 @@ namespace KinoVerwaltungAPI.Repositories
 
         public async Task<IEnumerable<Kino>> GetAllAsync()
         {
-            return await _context.Kinos.ToListAsync();
+            return await _context.Kinos.Include(k => k.Adresse).ToListAsync();
         }
 
         public async Task AddAsync(Kino kino)
