@@ -41,7 +41,7 @@ class TicketService {
 
   confirmTicket = async (ticketId) => {
     try {
-      const response = await axios.put(`${this.BASE_URL}/ticket/${ticketId}`);
+      const response = await axios.post(`${this.BASE_URL}/Ticket/${ticketId}`);
       if(response && response.data){
         return response.data;
       }
@@ -80,7 +80,7 @@ class TicketService {
 
   buyTicketWithMembercard = async (ticketReferenz, membercardReferenz) => {
     try {
-      const response = await axios.post(`${this.BASE_URL}/Zahlung/reservierung/bar?referenzNummer=${ticketReferenz}&identifikationsNummer=${membercardReferenz}`);
+      const response = await axios.post(`${this.BASE_URL}/Zahlung/reservierung/mitgliederkarte?referenzNummer=${ticketReferenz}&identifikationsNummer=${membercardReferenz}`);
       if(response && response.data){
         return response.data;
       }

@@ -2,9 +2,9 @@
   <v-card
     class=" pa-5 pb-8 ml-15"
     elevation="8"
-    width="100%"
     max-width="700"
     rounded="lg"
+    width="100%"
   >
     <h1>{{ $t('EmployeeArea.membercardBalance') }}</h1>
 
@@ -18,11 +18,11 @@
     </v-text-field>
 
     <v-text-field
-      type="number"
       v-model="balance"
       :placeholder="$t('EmployeeArea.enterBalance')"
       density="compact"
       prepend-inner-icon="mdi-cash"
+      type="number"
       variant="outlined">
     </v-text-field>
 
@@ -35,17 +35,18 @@
       + {{ $t('EmployeeArea.addBalance') }}
     </v-btn>
 
-<v-alert
-      v-if="isSuccessful"
-      class="mt-5"
-      type="success"
-      transition="scale-transition"
-      dismissible
+    <v-alert
+      v-model="isSuccessful"
       border="left"
+      class="mt-5"
+      dismissible
       elevation="2"
-      icon="mdi-check-circle">
+      icon="mdi-check-circle"
+      transition="scale-transition"
+      variant="tonal"
+      type="success">
       {{ $t('EmployeeArea.successfullyAddedBalance') }}
-</v-alert>
+    </v-alert>
 
   </v-card>
 </template>

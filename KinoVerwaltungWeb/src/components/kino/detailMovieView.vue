@@ -35,7 +35,7 @@
 
       <v-card :title="$t('Movies.reserveMovie')" >
         <v-card-text>
-          
+
           <v-progress-linear
             v-if="isLoading"
             color="blue"

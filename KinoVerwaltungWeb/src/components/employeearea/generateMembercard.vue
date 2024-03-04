@@ -3,7 +3,7 @@
     class=" pa-5 pb-8 "
     elevation="8"
     width="100%"
-    max-width="448"
+    max-width="500"
     rounded="lg"
   >
     <h1>{{ $t('EmployeeArea.generateMembercard') }}</h1>

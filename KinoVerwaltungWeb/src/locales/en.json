@@ -90,7 +90,14 @@
     "addBalance": "Add Balance",
     "identifycationNumber": "Identification Number",
     "enterBalance": "Enter the amount of balance",
-    "successfullyAddedBalance": "Successfully added balance to the membercard."
+    "successfullyAddedBalance": "Successfully added balance to the membercard.",
+    "ticketReferenz": "Ticket Referenz",
+    "confirmTicket": "Confirm Ticket",
+    "successfullyConfirmedTicket": "Successfully confirmed ticket.",
+    "buyTicket": "Buy Ticket",
+    "buyTicketWithCash": "Buy Ticket with Cash",
+    "successfullyBuyedTicket": "Successfully buyed ticket.",
+    "buyTicketWithMembercard": "Buy Ticket with Membercard"
   },
   "Administration": {
     "title": "Administration",
