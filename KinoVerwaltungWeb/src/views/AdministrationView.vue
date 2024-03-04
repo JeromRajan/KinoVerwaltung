@@ -8,9 +8,7 @@
           <div class="text-h5 font-weight-black text-blue-darken-1">{{ $t('Administration.cinemaOverview') }}</div>
         </v-expansion-panel-title>
         <v-expansion-panel-text>
-          <div class="mt-5" style="display: flex">
-            <addCinema></addCinema>
-          </div>
+          <cinemaOverview></cinemaOverview>
         </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>
@@ -56,14 +54,14 @@ import { defineComponent } from 'vue'
 import saalOverview from '@/components/administration/saalOverview.vue'
 import vorstellungOverview from '@/components/administration/vorstellungOverview.vue'
 import movieOverview from '@/components/administration/movieOverview.vue'
-import addCinema from '@/components/administration/addCinema.vue'
+import cinemaOverview from '@/components/administration/cinemaOverview.vue'
 
 export default defineComponent({
   components: {
     saalOverview,
     vorstellungOverview,
     movieOverview,
-    addCinema
+    cinemaOverview
   }
 })
 </script>

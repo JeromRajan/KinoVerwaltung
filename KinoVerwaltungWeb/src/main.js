@@ -47,7 +47,7 @@ const languageStore = useLanguageStore();
 languageStore.$subscribe((_, state) =>
 {
   console.info('Language changed to', state.language);
-  if (state.language === 'en' || state.language === 'de' || state.language === 'fr') {
+  if (state.language === 'en' || state.language === 'de' || state.language === 'fr' || state.language === 'it') {
     i18n.global.locale = state.language;
   } else {
     console.error('Invalid language:', state.language);

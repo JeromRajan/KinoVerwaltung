@@ -142,19 +142,6 @@ class AdminService {
     }
   }
 
-  getCinemas = async () => {
-    try {
-      const response = await axios.get(`${this.BASE_URL}/Kino`);
-      if(response && response.data){
-        return response.data;
-      }
-      return [];
-    } catch (error) {
-      console.error('Failed to get cinemas', error);
-      throw error;
-    }
-  }
-
   createSaal = async (kinoId, saal) => {
     try {
       const response = await axios.post(`${this.BASE_URL}/Kino/${kinoId}/saal`, saal);
@@ -230,6 +217,32 @@ class AdminService {
       return [];
     } catch (error) {
       console.error('Failed to update show', error);
+      throw error;
+    }
+  }
+
+  getCinemas = async () => {
+    try {
+      const response = await axios.get(`${this.BASE_URL}/Kino`);
+      if(response && response.data && response.data.$values && response.data.$values.length > 0){
+        return response.data.$values;
+      }
+      return [];
+    } catch (error) {
+      console.error('Failed to get cinemas', error);
+      throw error;
+    }
+  }
+
+  addCinema = async (cinema) => {
+    try {
+      const response = await axios.post(`${this.BASE_URL}/Kino`, cinema);
+      if(response && response.data){
+        return response.data;
+      }
+      return [];
+    } catch (error) {
+      console.error('Failed to add cinema', error);
       throw error;
     }
   }

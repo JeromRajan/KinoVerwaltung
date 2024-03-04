@@ -32,6 +32,13 @@ export const useUserStore = defineStore('user', {
         .then((balance) => {
           this.membercardBalance = balance
         })
+    },
+    getUserrole() {
+      if(this.user == null){
+        return -1
+      }else{
+        return this.user.rolleId
+      }
     }
   }
 })

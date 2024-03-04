@@ -11,7 +11,9 @@
     "memberarea": "Memberarea",
     "statistics": "Statistics",
     "administation": "Administation",
-    "employeearea": "Employeearea"
+    "employeearea": "Employeearea",
+    "admin": "Admin",
+    "employee": "Employee"
   },
   "Movies": {
     "title": "Movies",
@@ -135,7 +137,13 @@
     "noShows": "No shows available",
     "addShow": "Add Show",
     "startTime": "Start Time",
-    "date": "Date"
+    "date": "Date",
+    "cinemaName": "Cinema Name",
+    "street": "Street",
+    "houseNumber": "House Number",
+    "zipCode": "ZIP Code",
+    "city": "City",
+    "country": "Country"
   },
   "MemberArea": {
     "title": "Member Area",
