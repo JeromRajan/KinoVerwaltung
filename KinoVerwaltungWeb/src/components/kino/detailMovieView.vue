@@ -18,7 +18,7 @@
     </template>
   </v-snackbar>
 
-  <v-dialog max-width="900" v-model="dialog">
+  <v-dialog :max-width="calaculateWidth()" min-width="800" v-model="dialog">
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn
         color="primary"
@@ -149,6 +149,13 @@ export default {
     this.getZahlungsmethoden()
   },
   methods: {
+    calaculateWidth() {
+      if(this.sitze && this.sitze.reihen && this.sitze.reihen.$values.length > 0) {
+        return this.sitze.reihen.$values[0].sitze.$values.length * 120
+      }else{
+        return 900
+      }
+    },
     getZahlungsmethoden() {
       this.isLoading = true
       this.ticketService.getPaymentMethods()

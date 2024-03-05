@@ -177,7 +177,8 @@
     "paymentMethod": "Zahlungsmethode",
     "ticketStatus": "Ticketstatus",
     "byCashmethodCanOnlyBeUsedInCinema": "Die Zahlungsmethode 'Barzahlung' kann nur im Kino verwendet werden.",
-    "ticketBuySuccessInfo": "Sie haben erfolgreich ein Ticket gekauft."
+    "ticketBuySuccessInfo": "Sie haben erfolgreich ein Ticket gekauft.",
+    "noTickets": "Keine Tickets verfügbar"
   },
   "Statistics": {
     "title": "Statistiken",

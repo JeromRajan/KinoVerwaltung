@@ -177,7 +177,8 @@
     "paymentMethod": "Metodo di Pagamento",
     "ticketStatus": "Stato del Biglietto",
     "byCashmethodCanOnlyBeUsedInCinema": "Il metodo di pagamento 'Contanti' può essere utilizzato solo al cinema.",
-    "ticketBuySuccessInfo": "Hai acquistato il biglietto con successo."
+    "ticketBuySuccessInfo": "Hai acquistato il biglietto con successo.",
+    "noTickets": "Nessun biglietto disponibile"
   },
   "Statistics": {
     "title": "Statistiche",

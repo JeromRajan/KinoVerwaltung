@@ -8,15 +8,15 @@
         <v-btn text to="/" class="ml-5"><v-icon icon="mdi-movie-open" class="mr-2"/>
           {{ $t('Navigation.movies') }}
         </v-btn>
-        <v-btn v-if="useUserStore.getUserrole() === 1" text to="/memberarea" class="ml-5">
+        <v-btn v-if="useUserStore.getUserrole() === 3" text to="/memberarea" class="ml-5">
           <v-icon icon="mdi-card-account-details" class="mr-2"/>
           {{ $t('Navigation.memberarea') }}
         </v-btn>
-        <v-btn v-if="useUserStore.getUserrole() === 3" text to="/statistics" class="ml-5">
+        <v-btn v-if="useUserStore.getUserrole() === 1" text to="/statistics" class="ml-5">
           <v-icon icon="mdi-chart-bar" class="mr-2"/>
           {{ $t('Navigation.statistics') }}
         </v-btn>
-        <v-btn v-if="useUserStore.getUserrole() === 3" text to="/administration" class="ml-5">
+        <v-btn v-if="useUserStore.getUserrole() === 1" text to="/administration" class="ml-5">
           <v-icon icon="mdi-cogs" class="mr-2"/>
           {{ $t('Navigation.administation') }}
         </v-btn>
@@ -31,7 +31,7 @@
       </div>
       <div v-else>
         <v-icon icon="mdi-account" class="mr-2"/>
-        <span v-if="useUserStore.getUserrole() === 3">{{$t('Navigation.admin')}}</span>
+        <span v-if="useUserStore.getUserrole() === 1">{{$t('Navigation.admin')}}</span>
         <span v-else-if="useUserStore.getUserrole() === 2">{{$t('Navigation.employee')}}</span>
         <span v-else >{{useUserStore.user.vorname}} {{useUserStore.user.nachname}}</span>
         <v-btn text @click="logout"><v-icon icon="mdi-logout" class="mr-2"/> {{$t('Navigation.logout')}}</v-btn>

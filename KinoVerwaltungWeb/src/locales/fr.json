@@ -177,7 +177,8 @@
     "paymentMethod": "Moyen de paiement",
     "ticketStatus": "Statut du billet",
     "byCashmethodCanOnlyBeUsedInCinema": "Le mode de paiement 'En espèces' ne peut être utilisé qu'au cinéma.",
-    "ticketBuySuccessInfo": "Vous avez acheté un billet avec succès."
+    "ticketBuySuccessInfo": "Vous avez acheté un billet avec succès.",
+    "noTickets": "Aucun billet disponible"
   },
   "Statistics": {
     "title": "Statistiques",

@@ -48,7 +48,7 @@
             </v-text-field>
 
             <v-text-field
-              v-model="editSaal.anzahlSitzplaetze"
+              v-model="editSaal.anzahlSitzPlaetzeProReihe"
               :label="$t('Administration.seatNumber')"
               density="compact"
               type="number"
@@ -93,7 +93,7 @@ export default {
       default: () => {
         return {
           name: "",
-          anzahlSitzplaetze: 0,
+          anzahlSitzPlaetzeProReihe: 0,
           anzahlReihen: 0
         }
       }
@@ -122,7 +122,7 @@ export default {
           SaalId: this.editSaal.saalId
         },
         AnzahlReihen: this.editSaal.anzahlReihen,
-        AnzahlSitzeProReihe: this.editSaal.anzahlSitzplaetze,
+        AnzahlSitzeProReihe: this.editSaal.anzahlSitzPlaetzeProReihe,
       }
 
       this.adminService.updateSaal(saalObject).then(response => {

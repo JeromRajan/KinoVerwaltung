@@ -61,7 +61,7 @@ export default {
       isLoading: false,
       headers: [
         { title: this.$t('Administration.tableTitle'), value: 'titel' },
-        { title: this.$t('Administration.description'), value: 'beschreibung' },
+        { title: this.$t('Administration.description'), value: 'beschreibung', width: '30%' },
         { title: this.$t('Administration.duration'), value: 'dauer' },
         { title: this.$t('Administration.genre'), value: 'genreName' },
         { title: this.$t('Administration.language'), value: 'spracheName' },

@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <v-progress-linear
+    v-if="isLoading"
+    color="blue"
+    indeterminate>
+  </v-progress-linear>
+  <div v-else>
     <v-select
       v-model="selectedCinema"
       :items="cinemas"
@@ -24,12 +29,6 @@
       variant="tonal">
       {{ errorMessage }}
     </v-alert>
-
-    <v-progress-linear
-      v-if="isLoading"
-      color="blue"
-      indeterminate>
-    </v-progress-linear>
 
     <v-alert
       class="mb-5"
@@ -93,6 +92,7 @@ export default {
     }
   },
   created() {
+    this.isLoading = true
     this.getCinema();
   },
   methods: {
@@ -101,7 +101,7 @@ export default {
       this.errorMessage = ''
       this.adminService.getCinemas()
         .then(response => {
-          this.cinemas = response.$values
+          this.cinemas = response
           this.isLoading = false
         })
         .catch(error => {

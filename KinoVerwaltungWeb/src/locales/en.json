@@ -177,7 +177,8 @@
     "paymentMethod": "Payment Method",
     "ticketStatus": "Ticket Status",
     "byCashmethodCanOnlyBeUsedInCinema": "The payment method 'By Cash' can only be used in the cinema.",
-    "ticketBuySuccessInfo": "You have successfully bought a ticket."
+    "ticketBuySuccessInfo": "You have successfully bought a ticket.",
+    "noTickets": "No tickets available"
   },
   "Statistics": {
     "title": "Statistics",

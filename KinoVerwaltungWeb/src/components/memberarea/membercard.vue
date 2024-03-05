@@ -1,5 +1,5 @@
 <template>
-  <v-card v-if="mitgliederkarte"
+  <v-card v-if="mitgliederkarte &&  'mitgliederstatus' in this.mitgliederkarte && 'statusName' in this.mitgliederkarte.mitgliederstatus"
           elevation="8"
           max-width="700"
           rounded="lg"
@@ -59,17 +59,21 @@ export default {
   },
   computed: {
     statusClass() {
-      if (!this.mitgliederkarte) return ''
-      switch (this.mitgliederkarte.mitgliederstatus.statusName.toLowerCase()) {
-        case 'bronze':
-          return 'bronze-background'
-        case 'silber':
-          return 'silver-background'
-        case 'gold':
-          return 'gold-background'
-        default:
-          return ''
+      if (this.mitgliederkarte && 'mitgliederstatus' in this.mitgliederkarte && 'statusName' in this.mitgliederkarte.mitgliederstatus) {
+        switch (this.mitgliederkarte.mitgliederstatus.statusName.toLowerCase()) {
+          case 'bronze':
+            return 'bronze-background'
+          case 'silber':
+            return 'silver-background'
+          case 'gold':
+            return 'gold-background'
+          default:
+            return ''
+        }
+      }else {
+        return ''
       }
+
     }
   }
 

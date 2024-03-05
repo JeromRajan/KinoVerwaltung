@@ -81,15 +81,6 @@
           </v-icon>
         </v-btn>
       </template>
-
-<!--      <template v-slot:item.datum="{ item }">-->
-<!--        {{ new Date(item.datum).toLocaleDateString() }}-->
-<!--      </template>-->
-
-<!--      <template v-slot:item.startZeit="{ item }">-->
-<!--        {{ new Date(item.startZeit).toLocaleTimeString() }}-->
-<!--      </template>-->
-
     </v-data-table>
 
   </div>
@@ -113,7 +104,7 @@ export default {
       isLoading: false,
       headers: [
         { title: this.$t('Movies.showTitle'), key: 'filmTitel' },
-        { title: this.$t('Movies.description'), key: 'filmBeschreibung' },
+        { title: this.$t('Movies.description'), key: 'filmBeschreibung' , width: '30%'},
         { title: this.$t('Movies.date'), key: 'datum' },
         { title: this.$t('Movies.time'), key: 'startZeit' },
         { title: this.$t('Movies.duration'), key: 'filmDauer' },
@@ -140,7 +131,7 @@ export default {
 
       this.adminService.getCinemas()
         .then(response => {
-          this.cinemas = response.$values
+          this.cinemas = response
           this.isLoading = false
         })
         .catch(error => {
@@ -177,7 +168,6 @@ export default {
           this.isLoading = false
         })
         .catch(error => {
-          console.log("deleteShow", error.response)
           this.errorMessage = error.response.data
           this.isLoading = false
         })

@@ -74,6 +74,15 @@
           </v-chip>
         </template>
       </v-data-table>
+
+      <v-alert
+        v-else
+        class="mb-5"
+        dismissible
+        type="info"
+        variant="tonal">
+        {{ $t('MemberArea.noTickets') }}
+      </v-alert>
     </v-card>
   </div>
 </template>
@@ -116,15 +125,19 @@ export default {
     getTickets() {
       this.isLoading = true
       this.errorMessage = ''
-      this.ticketService.getTicketByUserId(this.userStore.user.benutzerId)
-        .then(tickets => {
-          this.tickets = tickets
-        })
-        .catch(error => {
-          this.errorMessage = error
-        }).finally(() => {
+      if(this.userStore.user){
+        this.ticketService.getTicketByUserId(this.userStore.user.benutzerId)
+          .then(tickets => {
+            this.tickets = tickets
+          })
+          .catch(error => {
+            this.errorMessage = error
+          }).finally(() => {
           this.isLoading = false
         })
+      }else {
+        this.isLoading = false
+      }
     },
     buyTicket(ticketId) {
       this.isLoading = true
@@ -136,7 +149,11 @@ export default {
           this.getTickets()
         })
         .catch(error => {
-          this.errorMessage = error
+          if(error.response){
+            this.errorMessage = error.response.data
+          }else {
+            this.errorMessage = error
+          }
         })
         .finally(() => {
           this.isLoading = false

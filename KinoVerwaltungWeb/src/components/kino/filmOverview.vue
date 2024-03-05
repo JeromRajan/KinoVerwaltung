@@ -86,7 +86,7 @@ export default defineComponent({
   created() {
     this.headers = [
       { title: this.$t('Movies.showTitle'), key: 'title' },
-      { title: this.$t('Movies.description'), key: 'description' },
+      { title: this.$t('Movies.description'), key: 'description', width: '40%'},
       { title: this.$t('Movies.date'), key: 'date' },
       { title: this.$t('Movies.time'), key: 'time' },
       { title: this.$t('Movies.duration'), key: 'duration' },
