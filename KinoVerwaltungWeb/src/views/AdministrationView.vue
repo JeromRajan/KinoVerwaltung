@@ -54,7 +54,7 @@ import { defineComponent } from 'vue'
 import saalOverview from '@/components/administration/saalOverview.vue'
 import vorstellungOverview from '@/components/administration/vorstellungOverview.vue'
 import movieOverview from '@/components/administration/movieOverview.vue'
-import cinemaOverview from '@/components/administration/cinemaOverview.vue'
+import cinemaOverview from '@/components/administration/kinosOverview.vue'
 
 export default defineComponent({
   components: {

@@ -14,11 +14,11 @@
 </template>
 
 <script>
-import generateMembercard from '@/components/employeearea/generateMembercard.vue'
-import loadMembercard from '@/components/employeearea/loadMembercard.vue'
-import confirmTicket from '@/components/employeearea/confirmTicket.vue'
-import buyTicketWithCash from '@/components/employeearea/buyTicketWithCash.vue'
-import buyTicketWithMembercard from '@/components/employeearea/buyTicketWithMembercard.vue'
+import generateMembercard from '@/components/mitarbeiterBereich/generateMitgliederkarte.vue'
+import loadMembercard from '@/components/mitarbeiterBereich/loadMitgliederkarte.vue'
+import confirmTicket from '@/components/mitarbeiterBereich/confirmTicket.vue'
+import buyTicketWithCash from '@/components/mitarbeiterBereich/buyTicketBar.vue'
+import buyTicketWithMembercard from '@/components/mitarbeiterBereich/buyTicketMitgliederkarte.vue'
 
 export default {
   name: 'EmployeeAreaView',

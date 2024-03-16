@@ -6,7 +6,7 @@
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        // DbSets represent tables in the database.
+        // DbSets reprentiert tabellen in der datenbank.
         public DbSet<Kino> Kinos { get; set; }
         public DbSet<Adresse> Adressen { get; set; }
         public DbSet<Saal> Saele { get; set; }

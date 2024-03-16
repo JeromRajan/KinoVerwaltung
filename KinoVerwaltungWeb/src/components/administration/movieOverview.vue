@@ -44,8 +44,8 @@
 
 <script>
 import AdminService from '@/services/adminService.js'
-import AddMovie from '@/components/administration/addMovie.vue'
-import EditMovie from '@/components/administration/editMovie.vue'
+import AddMovie from '@/components/administration/addFilm.vue'
+import EditMovie from '@/components/administration/editFilm.vue'
 
 export default {
   name: 'movieOverview',

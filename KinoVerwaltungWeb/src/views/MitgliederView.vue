@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import membercard from '@/components/memberarea/membercard.vue'
-import tickets from '@/components/memberarea/tickets.vue'
+import membercard from '@/components/mitgliederBereich/mitgliederkarte.vue'
+import tickets from '@/components/mitgliederBereich/tickets.vue'
 export default {
   name: 'memberareaMember',
   components: {

@@ -67,7 +67,7 @@
 <script>
 import { defineComponent } from 'vue'
 import { useKinoStore } from '@/stores/kinoStore.js'
-import detailMovieView from '@/components/kino/detailMovieView.vue'
+import detailMovieView from '@/components/kino/detailFilmView.vue'
 
 export default defineComponent({
   name: 'filmOverview',

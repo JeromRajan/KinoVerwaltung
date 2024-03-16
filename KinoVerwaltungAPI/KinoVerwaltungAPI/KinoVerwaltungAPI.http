@@ -1,6 +1,1 @@
 @KinoVerwaltungAPI_HostAddress = http://localhost:5200
-
-GET {{KinoVerwaltungAPI_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

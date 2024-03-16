@@ -32,7 +32,7 @@
 
 <script>
 import AdminService from '@/services/adminService.js'
-import AddCinema from '@/components/administration/addCinema.vue'
+import AddCinema from '@/components/administration/addKino.vue'
 export default {
   name: 'cinemaOverview',
   components: {

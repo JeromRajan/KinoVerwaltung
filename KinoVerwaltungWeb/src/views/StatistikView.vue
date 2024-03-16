@@ -51,13 +51,13 @@
 </template>
 
 <script>
-import hallOccupancy from '@/components/statistics/hallOccupancy.vue'
-import cinemaOccupancy from '@/components/statistics/cinemaOccupancy.vue'
-import cinemaSales from '@/components/statistics/cinemaSales.vue'
-import hallSales from '@/components/statistics/hallSales.vue'
-import movieSales from '@/components/statistics/movieSales.vue'
-import userSales from '@/components/statistics/userSales.vue'
-import addCinema from '@/components/administration/addCinema.vue'
+import hallOccupancy from '@/components/statistiken/saalBelegung.vue'
+import cinemaOccupancy from '@/components/statistiken/kinoBelegung.vue'
+import cinemaSales from '@/components/statistiken/kinoVerkäufe.vue'
+import hallSales from '@/components/statistiken/saalVerkäufe.vue'
+import movieSales from '@/components/statistiken/filmVerkäufe.vue'
+import userSales from '@/components/statistiken/benutzerVerkäufe.vue'
+import addCinema from '@/components/administration/addKino.vue'
 
 export default {
   name: 'StatisticsView',

@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import MovieView from '@/views/MovieView.vue'
-import MemberAreaView from '@/views/MemberAreaView.vue'
-import StatisticsView from '@/views/StatisticsView.vue'
+import MovieView from '@/views/FilmView.vue'
+import MemberAreaView from '@/views/MitgliederView.vue'
+import StatisticsView from '@/views/StatistikView.vue'
 import AdministrationView from '@/views/AdministrationView.vue'
-import DetailMovieView from '@/components/kino/detailMovieView.vue'
+import DetailMovieView from '@/components/kino/detailFilmView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
-import EmployeeAreaView from '@/views/EmployeeAreaView.vue'
+import EmployeeAreaView from '@/views/MitarbeiterView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,7 +18,7 @@ const router = createRouter({
     },
     {
       path: '/memberarea',
-      name: 'memberarea',
+      name: 'mitgliederBereich',
       component: MemberAreaView
     },
     {
@@ -48,7 +48,7 @@ const router = createRouter({
     },
     {
       path: '/employeearea',
-      name: 'employeearea',
+      name: 'mitarbeiterBereich',
       component: EmployeeAreaView
     }
   ]
