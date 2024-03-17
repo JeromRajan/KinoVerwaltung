@@ -51,16 +51,20 @@ export default defineComponent({
   },
   watch: {
     "useKinoStore.currentKino": function () {
+      //Zurücksetzen des aktuellen Saals
       this.currentHall = "";
       this.hallItems = [];
     },
     "useKinoStore.currentHall": function (val) {
+      //Der aktuelle Saal im Store gesetzt
       this.currentHall = val;
     },
     "useKinoStore.halls": function (val) {
+      //Die Saal-Items im Store gesetzt
       this.hallItems = val;
     },
     currentHall: function() {
+      //Der aktuelle Saal im Store gesetzt
       this.useKinoStore.currentHall = this.currentHall;
     },
   },

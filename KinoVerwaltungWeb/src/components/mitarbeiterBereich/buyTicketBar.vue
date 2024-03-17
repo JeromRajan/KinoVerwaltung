@@ -73,6 +73,7 @@ export default {
   },
   methods: {
     buyTicket() {
+      //Ticket kaufen
       this.isSuccessful = false
       this.isError = false
       this.errorMsg = ''

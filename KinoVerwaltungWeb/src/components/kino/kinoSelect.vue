@@ -45,6 +45,7 @@ export default defineComponent({
   },
   watch: {
     currentKino: function(val) {
+      //Der aktuelle Kino im Store gesetzt
       this.useKinoStore.setCurrentKino(val);
     },
   },

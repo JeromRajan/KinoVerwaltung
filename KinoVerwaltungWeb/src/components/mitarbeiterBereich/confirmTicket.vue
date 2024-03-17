@@ -72,6 +72,7 @@ export default {
   },
   methods: {
     confirmTicket() {
+      // Ticket bestätigen
       this.isSuccessful = false
       this.isError = false
       this.errorMsg = ''

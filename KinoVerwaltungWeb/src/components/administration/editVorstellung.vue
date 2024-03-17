@@ -129,14 +129,14 @@ export default {
   },
   methods: {
     cancel() {
+      // Dialog schliessen
       this.dialog = false
       this.$emit('show-saved')
     },
     saveShow() {
+      // Vorstellung speichern
       this.isLoading = true
       this.error = ''
-
-      console.log(this.showEdit)
 
       const dateTime = `${this.showEdit.datum}T${this.showEdit.startZeit}`
       const dateObj = new Date(dateTime)
@@ -163,6 +163,7 @@ export default {
       })
     },
     getMovies() {
+      // Alle Filme holen
       this.isLoading = true
       this.error = ''
       this.adminService.getMovies().then(response => {

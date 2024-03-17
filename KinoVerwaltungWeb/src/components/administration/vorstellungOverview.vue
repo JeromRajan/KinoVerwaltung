@@ -126,6 +126,7 @@ export default {
   },
   methods: {
     getCinemas() {
+      // Alle Kinos holen
       this.isLoading = true
       this.errorMessage = ''
 
@@ -141,6 +142,7 @@ export default {
     },
 
     getSaals() {
+      // Alle Säle holen
       this.saals = []
       this.selectedSaal = null
       this.shows = []
@@ -159,6 +161,7 @@ export default {
     },
 
     deleteShow(showId) {
+      // Vorstellung löschen
       this.isLoading = true
       this.errorMessage = ''
 
@@ -174,6 +177,7 @@ export default {
     },
 
     getShows() {
+      // Alle Vorstellungen holen
       this.isLoading = true
       this.errorMessage = ''
 

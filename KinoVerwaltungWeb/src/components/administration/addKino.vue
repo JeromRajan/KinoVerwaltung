@@ -122,10 +122,12 @@ export default {
   },
   methods: {
     cancel() {
+      // Dialog schliessen
       this.dialog = false
       this.$emit('cinemaAdded')
     },
     createCinema() {
+      // Kino hinzufügen
       this.isLoading = true
       this.error = ''
       this.adminService.addCinema(this.cinema).then(() => {

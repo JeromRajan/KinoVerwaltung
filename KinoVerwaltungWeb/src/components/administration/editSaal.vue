@@ -110,10 +110,12 @@ export default {
   },
   methods: {
     cancel() {
+      // Dialog schliessen
       this.dialog = false
       this.$emit('saal-saved')
     },
     saveSaal() {
+      // Saal speichern
       this.isLoading = true
       this.error = ''
       const saalObject = {

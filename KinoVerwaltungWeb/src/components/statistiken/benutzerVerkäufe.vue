@@ -64,6 +64,7 @@ export default {
     },
 
     getUsers() {
+      // Benutzerdaten laden
       this.userSerivce.getUsers().then((data) => {
         this.users = data
       })

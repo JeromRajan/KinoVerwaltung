@@ -138,10 +138,12 @@ export default {
   },
   methods: {
     cancel() {
+      // Dialog schliessen
       this.dialog = false
       this.$emit('movie-saved')
     },
     saveMovie() {
+      // Film speichern
       this.isLoading = true
       this.error = ''
       try {
@@ -167,6 +169,7 @@ export default {
       }
     },
     getGenres() {
+      // Genres holen
       this.adminService.getGenres().then(response => {
         if (response && response.$values && response.$values.length > 0) {
           this.genres = response.$values
@@ -174,6 +177,7 @@ export default {
       })
     },
     getLanguages() {
+      // Sprachen holen
       this.adminService.getLanguages().then(response => {
         if (response && response.$values && response.$values.length > 0) {
           this.languages = response.$values

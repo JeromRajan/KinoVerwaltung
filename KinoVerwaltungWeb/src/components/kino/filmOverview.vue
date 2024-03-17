@@ -116,11 +116,13 @@ export default defineComponent({
   },
   methods: {
     setMovie(movie) {
+      //Film in Store setzen und auf Detailseite weiterleiten
       this.useKinoStore.setCurrentMovie(movie)
       this.$router.push({ name: 'MovieDetail', params: { id: movie.detail }});
     },
 
     fillMovies() {
+      //Filme in Tabelle füllen
       this.useKinoStore.movies.forEach(movie => {
         this.movies.push({
           title: movie.filmTitel,
@@ -138,6 +140,7 @@ export default defineComponent({
       })
     },
     loadMovie(value){
+      //Filme laden
       if(value !== -1){
         this.programmSelection = value;
       }
@@ -155,17 +158,21 @@ export default defineComponent({
       }
     },
     resetMovies() {
+      //Filme zurücksetzen
       this.movies = []
     },
     calculateDuration(duration) {
+      //Film Dauer berechnen
       const hours = Math.floor(duration / 60);
       const minutes = duration % 60;
       return hours + " " + this.$t('Movies.hours')+ "  " + minutes + " " + this.$t('Movies.minutes')
     },
     getTimeslot(time) {
+      //Zeit aus Datum extrahieren
       return time.split("T")[1].split(":").slice(0, 2).join(":")
     },
     getDateslot(date) {
+      //Datum aus Date type extrahieren
       return date.split("T")[0]
     }
   }

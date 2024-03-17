@@ -66,6 +66,7 @@ export default {
   },
   methods: {
     async addBalance() {
+      // Mitgliedskarte betrag hinzufügen
       this.isSuccessful = false
       const adminService = AdminService.getInstance()
       const membercard = await adminService.addBalance(this.identifikationsNummer, this.balance)

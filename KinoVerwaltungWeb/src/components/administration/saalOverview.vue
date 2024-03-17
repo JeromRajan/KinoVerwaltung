@@ -97,6 +97,7 @@ export default {
   },
   methods: {
     getCinema() {
+      // Alle Kinos holen
       this.isLoading = true
       this.errorMessage = ''
       this.adminService.getCinemas()
@@ -111,6 +112,7 @@ export default {
     },
 
     getSaals() {
+      // Alle Säle holen
       this.isLoading = true
       this.errorMessage = ''
       this.adminService.getSaalsinfoByCinema(this.selectedCinema)
@@ -125,6 +127,7 @@ export default {
     },
 
     deleteSaal(saalId) {
+      // Saal löschen
       this.isLoading = true
       this.errorMessage = ''
       this.adminService.deleteSaal(saalId)

@@ -108,10 +108,12 @@ export default {
   },
   methods: {
     cancel() {
+      // Dialog schliessen
       this.dialog = false
       this.$emit('saal-added')
     },
     createSaal() {
+      // Saal hinzufügen
       this.isLoading = true
       this.error = ''
       this.adminService.createSaal(this.kinoId, this.saal).then(response => {

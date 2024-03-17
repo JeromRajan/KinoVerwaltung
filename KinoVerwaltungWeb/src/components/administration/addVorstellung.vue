@@ -127,10 +127,12 @@ export default {
   },
   methods: {
     cancel() {
+      // Dialog schliessen
       this.dialog = false
       this.$emit('show-added')
     },
     createShow() {
+      // Vorstellung hinzufügen
       this.isLoading = true
       this.error = ''
 
@@ -161,6 +163,7 @@ export default {
       })
     },
     getMovies() {
+      // get all movies
       this.isLoading = true
       this.error = ''
       this.adminService.getMovies().then(response => {

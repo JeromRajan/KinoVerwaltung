@@ -75,6 +75,7 @@ export default {
   },
   methods: {
     getMovies() {
+      // Alle Filme holen
       this.isLoading = true
       this.errorMessage = ''
       this.adminService.getMovies().then(response => {
@@ -90,6 +91,7 @@ export default {
 
 
     deleteMovie(movieId) {
+      // Film löschen
       this.isLoading = true
       this.errorMessage = ''
       this.adminService.deleteMovie(movieId).then(response => {

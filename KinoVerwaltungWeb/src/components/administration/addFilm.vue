@@ -141,10 +141,12 @@ export default {
   },
   methods: {
     cancel() {
+      // Dialog schliessen
       this.dialog = false
       this.$emit('movieAdded')
     },
     createMovie() {
+      // Film erstellen
       this.isLoading = true
       this.error = ''
       try {
@@ -170,6 +172,7 @@ export default {
       }
     },
     getGenres() {
+      // Alle Genres holen
       this.adminService.getGenres().then(response => {
         if (response && response.$values && response.$values.length > 0) {
           this.genres = response.$values
@@ -177,6 +180,7 @@ export default {
       })
     },
     getLanguages() {
+      // Alle Sprachen holen
       this.adminService.getLanguages().then(response => {
         if (response && response.$values && response.$values.length > 0) {
           this.languages = response.$values

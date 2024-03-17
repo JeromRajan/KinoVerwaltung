@@ -36,6 +36,7 @@ export default {
   },
   methods: {
     async generateMembercard() {
+      // Mitgliedskarte generieren
       const adminService = AdminService.getInstance()
       const membercard = await adminService.generateMembercard(this.identifikationsNummer)
       if (membercard) {
@@ -45,6 +46,7 @@ export default {
     },
 
     generatePdf() {
+      // PDF generieren
       const doc = new jsPDF()
       doc.text(`${this.$t('EmployeeArea.identifycationNumber')}: ${this.identifikationsNummer}`, 10, 10)
       doc.save('identification-number.pdf')

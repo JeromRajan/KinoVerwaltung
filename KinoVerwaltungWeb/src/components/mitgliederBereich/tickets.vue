@@ -123,6 +123,7 @@ export default {
   },
   methods: {
     getTickets() {
+      // Alle Tickets des Benutzers holen
       this.isLoading = true
       this.errorMessage = ''
       if(this.userStore.user){
@@ -140,6 +141,7 @@ export default {
       }
     },
     buyTicket(ticketId) {
+      // Ticket mit Mitgliedskarte kaufen
       this.isLoading = true
       this.errorMessage = ''
       this.ticketService.buyTicketWithMembercard(ticketId, this.userStore.user.mitgliederkarte.identifikationsNummer)
@@ -160,6 +162,7 @@ export default {
         })
     },
     getTicketStatusColor(ticketStatus) {
+      // Farbe des Ticketstatus
       if (ticketStatus === 'Reserviert') {
         return 'warning'
       } else if (ticketStatus === 'Abgeschlossen') {

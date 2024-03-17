@@ -82,6 +82,7 @@ export default {
   },
   methods: {
     buyTicket() {
+      //Ticket mit Mitgliedskarte kaufen
       this.isSuccessful = false
       this.isError = false
       this.errorMsg = ''

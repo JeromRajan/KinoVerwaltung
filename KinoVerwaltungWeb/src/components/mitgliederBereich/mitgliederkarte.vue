@@ -59,6 +59,7 @@ export default {
   },
   computed: {
     statusClass() {
+      // Status der Mitgliedskarte
       if (this.mitgliederkarte && 'mitgliederstatus' in this.mitgliederkarte && 'statusName' in this.mitgliederkarte.mitgliederstatus) {
         switch (this.mitgliederkarte.mitgliederstatus.statusName.toLowerCase()) {
           case 'bronze':

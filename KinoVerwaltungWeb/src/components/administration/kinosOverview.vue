@@ -59,6 +59,7 @@ export default {
   },
   methods: {
     getCinemas() {
+      // Alle Kinos holen
       this.isLoading = true
       this.errorMessage = ''
       this.adminService.getCinemas().then(response => {

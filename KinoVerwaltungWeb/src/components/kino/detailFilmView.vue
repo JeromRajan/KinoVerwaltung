@@ -150,6 +150,7 @@ export default {
   },
   methods: {
     calaculateWidth() {
+      // Breite des Dialogs berechnen, abhängig von der Anzahl der Sitze
       if(this.sitze && this.sitze.reihen && this.sitze.reihen.$values.length > 0) {
         return this.sitze.reihen.$values[0].sitze.$values.length * 120
       }else{
@@ -157,6 +158,7 @@ export default {
       }
     },
     getZahlungsmethoden() {
+      // Zahlungsmethoden holen
       this.isLoading = true
       this.ticketService.getPaymentMethods()
         .then(response => {
@@ -171,9 +173,11 @@ export default {
     },
 
     cancel() {
+      // Dialog schliessen
       this.dialog = false
     },
     bookSeats() {
+      // Tickets kaufen und PDF generieren, falls der Benutzer ein Kinomitarbeiter ist
       const doc = new jsPDF()
       this.isLoading = true
       if(this.ausgewaehlteSitze && this.ausgewaehlteSitze.length > 0) {
@@ -206,6 +210,7 @@ export default {
     },
 
     reseveSeats() {
+      // Tickets reservieren, falls der Benutzer ein Kunde ist
       this.isLoading = true;
       if(this.ausgewaehlteSitze && this.ausgewaehlteSitze.length > 0 && this.useUserStore.user) {
         let count = 0
