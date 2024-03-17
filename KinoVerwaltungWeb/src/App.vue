@@ -88,6 +88,7 @@ export default {
   },
   created() {
     this.useKinoStore.fetchKino();
+    this.useUserStore.checkUser();
   },
   methods: {
     changeLanguage(lang) {

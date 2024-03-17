@@ -92,27 +92,6 @@ namespace KinoVerwaltungAPI.Repositories
                 ReferenzNummer = $"{timestamp}-{randomPart}"
             };
 
-            if (ticket != null) {
-                //Die Anzahl der gekauften Tickets der Mitgliederkarte erhöhen
-                mitgliederkarte.AnzahlGekaufterTickets++;
-                _context.Mitgliederkarten.Update(mitgliederkarte);
-                await _context.SaveChangesAsync();
-
-                //Mitgliederstatus aktualisieren
-                if (mitgliederkarte.AnzahlGekaufterTickets >= 5 && mitgliederkarte.AnzahlGekaufterTickets < 10)
-                {
-                    mitgliederkarte.MitgliederstatusId = 2;
-                    _context.Mitgliederkarten.Update(mitgliederkarte);
-                    await _context.SaveChangesAsync();
-                }
-                else if (mitgliederkarte.AnzahlGekaufterTickets >= 10)
-                {
-                    mitgliederkarte.MitgliederstatusId = 3;
-                    _context.Mitgliederkarten.Update(mitgliederkarte);
-                    await _context.SaveChangesAsync();
-                }
-            }
-
             _context.Tickets.Add(ticket);
             await _context.SaveChangesAsync();
             return ticket;
@@ -181,6 +160,33 @@ namespace KinoVerwaltungAPI.Repositories
 
             //Schauen, ob das Ticket noch nicht bezahlt ist
             if (ticket.Status != "Bezahlt") throw new Exception("Ticket noch nicht bezahlt.");
+
+
+            //Mitgliederkarte des Benutzers abfragen
+            var mitgliederkarte = await _context.Mitgliederkarten.FirstOrDefaultAsync(m => m.BenutzerId == ticket.BenutzerId);
+            if (mitgliederkarte == null) throw new Exception("Mitgliederkarte nicht gefunden.");
+
+            if (ticket != null)
+            {
+                //Die Anzahl der gekauften Tickets der Mitgliederkarte erhöhen
+                mitgliederkarte.AnzahlGekaufterTickets++;
+                _context.Mitgliederkarten.Update(mitgliederkarte);
+                await _context.SaveChangesAsync();
+
+                //Mitgliederstatus aktualisieren
+                if (mitgliederkarte.AnzahlGekaufterTickets >= 5 && mitgliederkarte.AnzahlGekaufterTickets < 10)
+                {
+                    mitgliederkarte.MitgliederstatusId = 2;
+                    _context.Mitgliederkarten.Update(mitgliederkarte);
+                    await _context.SaveChangesAsync();
+                }
+                else if (mitgliederkarte.AnzahlGekaufterTickets >= 10)
+                {
+                    mitgliederkarte.MitgliederstatusId = 3;
+                    _context.Mitgliederkarten.Update(mitgliederkarte);
+                    await _context.SaveChangesAsync();
+                }
+            }
 
             //Ticket Status auf "Abgeschlossen" setzen
             ticket.Status = "Abgeschlossen";

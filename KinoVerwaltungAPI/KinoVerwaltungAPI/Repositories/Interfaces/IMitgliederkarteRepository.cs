@@ -10,5 +10,7 @@ namespace KinoVerwaltungAPI.Repositories.Interfaces
         Task<Mitgliederstatus> AddMitgliederstatus(Mitgliederstatus mitgliederstatus);
 
         Task<Decimal> GetMitgliederBetragByBenutzerIdAsync(int benutzerId);
+
+        Task<Mitgliederkarte> GetMitgliederkarteByBenutzerIdAsync(int benutzerId);
     }
 }

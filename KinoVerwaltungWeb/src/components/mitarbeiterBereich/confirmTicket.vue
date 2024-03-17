@@ -76,10 +76,8 @@ export default {
       this.isError = false
       this.errorMsg = ''
       this.ticketService.confirmTicket(this.ticketReferenz)
-        .then(response => {
-          if (response.status === 200) {
+        .then(() => {
             this.isSuccessful = true
-          }
         })
         .catch(error => {
           this.isError = true

@@ -29,7 +29,7 @@
         </v-row>
         <v-row>
           <v-col class="font-weight-bold" cols="6">{{ $t('MemberArea.numberOfPurchasedTickets') }}:</v-col>
-          <v-col cols="6">{{ mitgliederkarte.anzahlGekaufterTickets }}</v-col>
+          <v-col cols="6">{{ userStore.user.mitgliederkarte.anzahlGekaufterTickets }}</v-col>
         </v-row>
 
       </div>

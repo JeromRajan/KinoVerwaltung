@@ -52,6 +52,20 @@ class UserService{
       }
     }
 
+  getMembercard = async (userId) => {
+      try {
+        const response = await axios.get(`${this.BASE_URL}/Mitgliederkarten/${userId}`);
+        if(response && response.data){
+          return response.data;
+        }
+        return null;
+      } catch (error) {
+        console.error('Failed to fetch membercard', error);
+        throw error;
+      }
+
+    }
+
     getUsers = async () => {
       try {
         const response = await axios.get(`${this.BASE_URL}/Benutzer`);

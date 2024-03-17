@@ -47,6 +47,13 @@ namespace KinoVerwaltungAPI.Controllers
             return Ok(betrag);
         }
 
+        [HttpGet("{benutzerId}")]
+        public async Task<ActionResult<Mitgliederkarte>> GetMitgliederkarteByBenutzerId(int benutzerId)
+        {
+            var mitgliederkarte = await _mitgliederkarteRepository.GetMitgliederkarteByBenutzerIdAsync(benutzerId);
+            return Ok(mitgliederkarte);
+        }
+
         #endregion
 
         //Mitgliederstatus-Endpunkte

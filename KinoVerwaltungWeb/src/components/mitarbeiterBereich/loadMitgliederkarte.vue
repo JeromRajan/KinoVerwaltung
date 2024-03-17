@@ -44,6 +44,7 @@
       icon="mdi-check-circle"
       transition="scale-transition"
       variant="tonal"
+      closable
       type="success">
       {{ $t('EmployeeArea.successfullyAddedBalance') }}
     </v-alert>
